@@ -52,7 +52,7 @@ _config.yml <--- สิ่งอื่นๆที่เป็น configuration 
 ``` powershell
 hexo server
 ```
-็Hexo จะถูกรันขึ้นมาที่ localhost port 4000 จังหวะนี้เปิด browser ดูก็จะเห็น Hexo theme Landscape พร้อม post แรกปรากฎขึ้นมา
+Hexo จะถูกรันขึ้นมาที่ localhost port 4000 จังหวะนี้เปิด browser ดูก็จะเห็น Hexo theme Landscape พร้อม post แรกปรากฎขึ้นมา
 
 ![](start-a-journey/hexo-hello-world-post.png)
 
@@ -76,6 +76,58 @@ $ git push -u origin master
 
 ### CI/CD to automatically deploy site when changes
 
-ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555
+ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ 
 
-1. 
+ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ
+
+1. ไปที่ github marketplace แล้วแอด [Travis CI](https://github.com/marketplace/travis-ci)
+2. ไปที่ github setting > [Application](https://github.com/settings/installations) > Travis Configure
+3. ตรงนี้สามารถ config ให้เฉพาะ repo ที่เป็น blog ของเราก็ได้นะคะ จากนั้นก็ save จะถูก redirect ไป travis ให้ activate github account จะเริ่มเชื่อม webhook กันด้วยการเอา token จาก github ไปใส่ เพราะงั้นเราจะไป github ก่อน
+4. ไปที่ github setting > Developer settings > [Personal access tokens](https://github.com/settings/tokens) ตรงนี้เราจะสร้าง token เพื่อให้ travis สามารถทำงานแทนเราในการ push/pull ภายใน repo ที่เรากำหนดได้ ด้วยการ generate new token ใส่ชื่อกันลืมเป็น travis.ci ใส่ลิทธิ์ในการดับ repo ก็พอค่ะ ถ้างงก็ดูรูป
+
+![](start-a-journey/new-personal-access-token.png)
+
+5. จบขั้นนี้ได้ token มา 1 ชุด กลับไปหา travis ci ไปที่ repo's setting ในเครื่องหมาย hamburger > Environment Variables ตั้งชื่อ GH_TOKEN แล้วเอา token ใส่ลง value กด Add เป็นอันจบ
+6. สร้างไฟล์ .travis.yml ไว้ในระดับเดียวกับ _config.yml เพื่อทำหน้าควบคุม flow CI/CD ของเรา ใส่ code ชุดนี้ลงไป
+
+``` yml
+sudo: false
+language: node_js
+node_js:
+  - 10
+cache: npm
+branches:
+  only:
+    - hexo-source
+script:
+  - hexo generate
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  target_branch: master
+  on:
+    branch: hexo-source
+  local-dir: public
+```
+code ข้างบนบอกว่า จับตาดู branch ที่ชื่อ hexo-source ถ้ามีการเปลี่ยนแปลงเข้ามาให้รันคำสั่ง
+
+```
+hexo generate
+```
+อันเป็นคำสั่งของการสร้าง file HTML/CSS/JS ตามที่เว็บ blog เราต้องการจากบรรดาไฟล์ .md ทั้งหลายที่เราส่งขึ้นไปให้โดยใช้ NodeJS v.10 เป็น build engine ผลพวงจากการ build ให้นำไป deploy ลงใน branch master โดยใช้ GH_TOKEN เป็นใบผ่านทางนั่นเองค่ะ
+
+7. สร้าง branch ใหม่ชื่อ hexo-source และ push ขึ้นไป
+8. นั่งยิ้มดู travis ci ทำงาน
+9. พอเสร็จแล้วให้ไปที่ Github repo setting ค่ะ เวรกรรมเรายังไม่จบ ไปเช็คก่อนค่ะว่า GitHub Pages เรามีตัวตนขึ้นมาแล้ว
+
+![](start-a-journey/github-pages.png)
+
+10. กดลิงค์ไปดูเว็บ blog ของตัวเองได้เลยค่ะ
+
+หลังจากนี้เมื่อเราสร้าง blog ใหม่แล้ว commit+push ขึ้นไป Travis CI ก็จะทำการ build .md ไฟล์ให้โดยอัตโนมัติ
+
+_____________________________________
+
+การเขียนบล็อคมันโหดมากจริงๆค่ะ ทั้งหมดนี่ทำไปแค่ 3 ชม. แต่เขียนบล็อคนี่คือ เขียนมาตั้งแต่วันอาทิตย์ 555555 โห อยากจะร้อง เอาเป็นว่าไว้ครั้งหน้ามีอะไรสนุกๆจะมาแชร์ใหม่ ไว้เจอกัน!!!
