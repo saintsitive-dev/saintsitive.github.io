@@ -5,15 +5,25 @@
   
 
   
-  <title>Saintsitive - life journal;</title>
+  <title>คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc | Saintsitive - life journal;</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Saintsitive - life journal;">
-<meta property="og:url" content="https://saintsitive-dev.github.io/index.html">
+  <meta name="description" content="มือก็ต้องเกี่ยวข้าว(coding) เท้าก็ต้องไกวเปล(documenting that sourcecode)ใครเป็นเดฟคงรู้ดีว่าชีวิตนี้มันปวดร้าว ที่ไหนมีทีม SA เราชาวเดฟยังพออาศัยพึ่งพาให้ผู้กล้าเหล่านั้นช่วยดูแล Technical document ท">
+<meta property="og:type" content="article">
+<meta property="og:title" content="คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc">
+<meta property="og:url" content="https://saintsitive-dev.github.io/2020/08/07/living-document/index.html">
 <meta property="og:site_name" content="Saintsitive - life journal;">
+<meta property="og:description" content="มือก็ต้องเกี่ยวข้าว(coding) เท้าก็ต้องไกวเปล(documenting that sourcecode)ใครเป็นเดฟคงรู้ดีว่าชีวิตนี้มันปวดร้าว ที่ไหนมีทีม SA เราชาวเดฟยังพออาศัยพึ่งพาให้ผู้กล้าเหล่านั้นช่วยดูแล Technical document ท">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/07/living-document/living-document-stack.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/07/living-document/export-xml.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/07/living-document/swashbuckle-structure.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/07/living-document/redoc-ui.png">
+<meta property="article:published_time" content="2020-08-07T22:46:48.000Z">
+<meta property="article:modified_time" content="2020-08-07T15:50:59.433Z">
 <meta property="article:author" content="Sirirat Rungpetcharat">
+<meta property="article:tag" content="Redoc, XML, C#, swagger">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://saintsitive-dev.github.io/2020/08/07/living-document/living-document-stack.png">
   
     <link rel="alternate" href="/atom.xml" title="Saintsitive - life journal;" type="application/atom+xml">
   
@@ -62,9 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-living-document" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-living-document" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/07/living-document/" class="article-date">
   <time datetime="2020-08-07T22:46:48.000Z" itemprop="datePublished">2020-08-07</time>
@@ -77,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
+    <h1 class="article-title" itemprop="name">
+      คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc
     </h1>
   
 
@@ -173,102 +181,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-start-a-journey" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/03/start-a-journey/" class="article-date">
-  <time datetime="2020-08-03T10:43:25.000Z" itemprop="datePublished">2020-08-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/03/start-a-journey/">Start a jouney with Hexo | NodeJS + Hexo + Travis CI + GitHub Pages</a>
-    </h1>
+    <a href="/2020/08/03/start-a-journey/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Start a jouney with Hexo | NodeJS + Hexo + Travis CI + GitHub Pages</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>มันเริ่มจากอารมณ์ที่ว่า “อยากจะมี Blog ที่ไม่ใช่ Wordpress/Medium” วันดีคืนดีอยากเปลี่ยนหน้าตาเองอย่างใจก็ทำได้ (แต่ทำมั้ยนี่อีกเรื่อง 5555) โดยมีเงื่อนไขสำคัญอยู่ 2 เรื่อง</p>
-<h3 id="“ฟรี-และเป็น-markup-language”"><a href="#“ฟรี-และเป็น-markup-language”" class="headerlink" title="“ฟรี และเป็น markup language”"></a>“ฟรี และเป็น markup language”</h3><p>แล้วจากการที่คุ้นเคยกับการทำ README.md อยู่บ้าง แล้วชอบความซิมเปิ้ลของมันเหลือเกิน เหมาะมาก สำหรับคนที่ code ได้แต่ไม่มีปัญญาเลือกคู่สีอย่างเรา เลยตัดสินใจว่ายังไงบล็อคนี้คงเขียนด้วย markup language ที่เป็น markdown (อย่าเพิ่งงง 555)</p>
-<p>เพราะอยากจะเขียนไปเรื่อยๆ แบบไม่ต้องสนใจอะไร อยากใช้ visual code เขียนบล็อค สองเดือนหลังนี้มีอาการตาแห้ง ไม่สามารถจ้องแสงสีขาวของพื้นพลัง Medium ได้นานๆอีกต่อไป แต่ก็คงไม่ได้ทิ้ง Medium นะคะ เผลอๆ บล็อคนี้อาจทำมาเพื่อลองของอย่างเดียวก็เป็นได้ 555 (ล้อเล่นๆ) ไหนๆก็ไหนๆ ฝาก <a target="_blank" rel="noopener" href="https://medium.com/@coalapaparazzi">Medium</a> ไว้ในอ้อมอกอ้อมใจอีกสักอัน</p>
-<p>เกริ่นมานาน เข้าเรื่อง geekๆ ของเราดีกว่า</p>
-<hr>
-<p>Stack ที่เลือกมาวันนี้ ตอนแรกว่าจะเล่น Jekyll แต่กลัวโลกไม่จำ เล่น Hexo ที่ไม่ค่อยมีคนใช้นี่ดีกว่าค่ะ 555</p>
-<p><img src="/2020/08/03/start-a-journey/blog-tech-stack.png"></p>
-<p>เพราะกำลังมองหา Blog Engine ที่รันบน NodeJS ได้ Deploy ง่าย และที่สำคัญคือมี Theme บอกแล้วว่ามันจำเป็นสำหรับคน code ได้แต่ลงสีไม่เป็น เอาละ งั้นเรามาเริ่มลงมือกันเลยดีกว่าค่ะ อยากมี blog ก็เริ่มที่ลง <a target="_blank" rel="noopener" href="https://nodejs.org/en/">NodeJS</a> ลงเสร็จก็ต่อด้วยพระเอกของเรา <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></p>
-<h3 id="Install-Hexo"><a href="#Install-Hexo" class="headerlink" title="Install Hexo"></a>Install Hexo</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo<span class="literal">-cli</span> <span class="literal">-g</span></span><br></pre></td></tr></table></figure>
-
-<p>เพียงเท่านี้ก็ได้ Hexo cli มาใช้รันคำสั่งต่างๆของ Hexo งั้นลงมือสร้าง blog แรกกัน หา folder เหมาะๆ แล้วรัน</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>ถ้าเข้าไปดูด้านใน จะเห็นโครงสร้างของ blog ดังนี้</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; node_modules &lt;--- ก้อนนี้เดฟทุกคนรู้จักดี 5555 แต่ไม่ได้เกี่ยวข้องกับโครงสร้าง blog เราในวันนี้ค่ะ</span><br><span class="line">&gt; scaffolds &lt;--- ที่เก็บ template ต่างๆของ post ที่เราสามารถสร้างได้ เราสร้างเพิ่มเองได้เช่นกัน</span><br><span class="line">&gt; source &lt;--- ทุกโพส รวมทั้งรูปประกอบจะกองกันอยู่ในนี้</span><br><span class="line">&gt; themes &lt;--- เปลี่ยน theme ได้ ทำ theme เองมาเพิ่มก็ได้</span><br><span class="line">_config.yml &lt;--- สิ่งอื่นๆที่เป็น configuration ของเว็บ blog และ meta data ของ blog เรา</span><br><span class="line">.gitignore &lt;--- คนใช้ git รู้กันดีว่ามีไว้เมินไฟล์ที่ไม่อยาก push ขึ้น remote</span><br><span class="line">.package.json &lt;--- มีไว้เก็บ version lib ต่างๆที่เราใช้</span><br></pre></td></tr></table></figure>
-<p>และถ้าเข้าไปดูใน source จะพบว่า Hexo ได้แถมโพสแรกมาให้เราแล้วในชื่อ hello-world.md เพราะฉะนั้นอย่ารอช้า รัน localhost ขึ้นมาดูหน้าตากัน</p>
-<h3 id="Run-Hexo-on-localhost"><a href="#Run-Hexo-on-localhost" class="headerlink" title="Run Hexo on localhost"></a>Run Hexo on localhost</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p>Hexo จะถูกรันขึ้นมาที่ localhost port 4000 จังหวะนี้เปิด browser ดูก็จะเห็น Hexo theme Landscape พร้อม post แรกปรากฎขึ้นมา</p>
-<p><img src="/2020/08/03/start-a-journey/hexo-hello-world-post.png"></p>
-<p>พอเห็นบน localhost ก็เริ่มอยากเห็นบน production 5555</p>
-<p>อยากได้ url .dev .io บ้าง แต่โอ้โห 40-50 เหรียญต่อปี (นี่แค่ domain ยังมีค่า SSL อีก) เดือนนี้ช็อตจริงๆ คงต้องหาทางฟรีๆ ที่มี .io ให้เราไปก่อน ก็มาพบว่า GitHub มี feature GitHub Pages ที่ให้เดฟ Host scalable web ของตัวเองได้ เพียงแค่ deploy ขึ้นไปไว้ใน branch master ของ repository ที่ตั้งชื่อว่า <em>username</em>.github.io</p>
-<h3 id="Create-new-repository-on-github"><a href="#Create-new-repository-on-github" class="headerlink" title="Create new repository on github"></a>Create new repository on github</h3><ol>
-<li>สร้าง repository ตั้งชื่อว่า <em>username</em>.github.io สำคัญมากที่ต้องตรงกับ username นะคะ</li>
-<li>push code ของเราขึ้นไปวางบน branch master ก่อนค่ะ มันจำเป็นต้องมี branch master เป็น branch แรก</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;new_repo</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
-<h3 id="CI-CD-to-automatically-deploy-site-when-changes"><a href="#CI-CD-to-automatically-deploy-site-when-changes" class="headerlink" title="CI/CD to automatically deploy site when changes"></a>CI/CD to automatically deploy site when changes</h3><p>ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ </p>
-<p>ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ</p>
-<ol>
-<li>ไปที่ github marketplace แล้วแอด <a target="_blank" rel="noopener" href="https://github.com/marketplace/travis-ci">Travis CI</a></li>
-<li>ไปที่ github setting &gt; <a target="_blank" rel="noopener" href="https://github.com/settings/installations">Application</a> &gt; Travis Configure</li>
-<li>ตรงนี้สามารถ config ให้เฉพาะ repo ที่เป็น blog ของเราก็ได้นะคะ จากนั้นก็ save จะถูก redirect ไป travis ให้ activate github account จะเริ่มเชื่อม webhook กันด้วยการเอา token จาก github ไปใส่ เพราะงั้นเราจะไป github ก่อน</li>
-<li>ไปที่ github setting &gt; Developer settings &gt; <a target="_blank" rel="noopener" href="https://github.com/settings/tokens">Personal access tokens</a> ตรงนี้เราจะสร้าง token เพื่อให้ travis สามารถทำงานแทนเราในการ push/pull ภายใน repo ที่เรากำหนดได้ ด้วยการ generate new token ใส่ชื่อกันลืมเป็น travis.ci ใส่ลิทธิ์ในการดับ repo ก็พอค่ะ ถ้างงก็ดูรูป</li>
-</ol>
-<p><img src="/2020/08/03/start-a-journey/new-personal-access-token.png"></p>
-<ol start="5">
-<li>จบขั้นนี้ได้ token มา 1 ชุด กลับไปหา travis ci ไปที่ repo’s setting ในเครื่องหมาย hamburger &gt; Environment Variables ตั้งชื่อ GH_TOKEN แล้วเอา token ใส่ลง value กด Add เป็นอันจบ</li>
-<li>สร้างไฟล์ .travis.yml ไว้ในระดับเดียวกับ _config.yml เพื่อทำหน้าควบคุม flow CI/CD ของเรา ใส่ code ชุดนี้ลงไป</li>
-</ol>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">hexo-source</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">hexo-source</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
-<p>code ข้างบนบอกว่า จับตาดู branch ที่ชื่อ hexo-source ถ้ามีการเปลี่ยนแปลงเข้ามาให้รันคำสั่ง</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-<p>อันเป็นคำสั่งของการสร้าง file HTML/CSS/JS ตามที่เว็บ blog เราต้องการจากบรรดาไฟล์ .md ทั้งหลายที่เราส่งขึ้นไปให้โดยใช้ NodeJS v.10 เป็น build engine ผลพวงจากการ build ให้นำไป deploy ลงใน branch master โดยใช้ GH_TOKEN เป็นใบผ่านทางนั่นเองค่ะ</p>
-<ol start="7">
-<li>สร้าง branch ใหม่ชื่อ hexo-source และ push ขึ้นไป</li>
-<li>นั่งยิ้มดู travis ci ทำงาน</li>
-<li>พอเสร็จแล้วให้ไปที่ Github repo setting ค่ะ เวรกรรมเรายังไม่จบ ไปเช็คก่อนค่ะว่า GitHub Pages เรามีตัวตนขึ้นมาแล้ว</li>
-</ol>
-<p><img src="/2020/08/03/start-a-journey/github-pages.png"></p>
-<ol start="10">
-<li>กดลิงค์ไปดูเว็บ blog ของตัวเองได้เลยค่ะ</li>
-</ol>
-<p>หลังจากนี้เมื่อเราสร้าง blog ใหม่แล้ว commit+push ขึ้นไป Travis CI ก็จะทำการ build .md ไฟล์ให้โดยอัตโนมัติ</p>
-<hr>
-<p>การเขียนบล็อคมันโหดมากจริงๆค่ะ ทั้งหมดนี่ทำไปแค่ 3 ชม. แต่เขียนบล็อคนี่คือ เขียนมาตั้งแต่วันอาทิตย์ 555555 โห อยากจะร้อง เอาเป็นว่าไว้ครั้งหน้ามีอะไรสนุกๆจะมาแชร์ใหม่ ไว้เจอกัน!!!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckdkepbul0002zum876oq125l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
