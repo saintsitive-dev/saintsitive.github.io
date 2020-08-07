@@ -1,6 +1,6 @@
 ---
 title: "คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc"
-tags: 'Redoc', 'XML', 'C#', 'swagger'
+tags: [Redoc, XML, C#, swagger]
 date: 2020-08-07 22:46:48
 ---
 
