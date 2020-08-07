@@ -1,6 +1,6 @@
 ---
-title: living-document
-tags:
+title: คืนชีวิตให้ Technical Document ด้วย C# XML Comments+ swagger.json + Redoc
+tags: NodeJS, Redoc, XML
 ---
 
 ## มือก็ต้องเกี่ยวมือก็ต้องเกี่ยวข้าว(coding) เท้าก็ต้องไกวเปล(documenting that sourcecode)
