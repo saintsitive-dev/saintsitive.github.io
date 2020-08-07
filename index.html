@@ -64,119 +64,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-living-document" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/08/07/living-document/" class="article-date">
-  <time datetime="2020-08-07T22:46:48.000Z" itemprop="datePublished">2020-08-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="มือก็ต้องเกี่ยวข้าว-coding-เท้าก็ต้องไกวเปล-documenting-that-sourcecode"><a href="#มือก็ต้องเกี่ยวข้าว-coding-เท้าก็ต้องไกวเปล-documenting-that-sourcecode" class="headerlink" title="มือก็ต้องเกี่ยวข้าว(coding) เท้าก็ต้องไกวเปล(documenting that sourcecode)"></a>มือก็ต้องเกี่ยวข้าว(coding) เท้าก็ต้องไกวเปล(documenting that sourcecode)</h2><p>ใครเป็นเดฟคงรู้ดีว่าชีวิตนี้มันปวดร้าว ที่ไหนมีทีม SA เราชาวเดฟยังพออาศัยพึ่งพาให้ผู้กล้าเหล่านั้นช่วยดูแล Technical document ทั้งหลายได้บ้าง แต่สำหรับทีมเดฟล้วน ที่ต้องทั้งเขียน code แล้วยังต้องมาดูแล Technical document ด้วยนั้น</p>
-<h3 id="บอกเลยว่า-Trilogy-แถม-Drama-Comedy-สุดๆ"><a href="#บอกเลยว่า-Trilogy-แถม-Drama-Comedy-สุดๆ" class="headerlink" title="บอกเลยว่า Trilogy แถม Drama Comedy สุดๆ"></a>บอกเลยว่า Trilogy แถม Drama Comedy สุดๆ</h3><p>จะไม่ทำก็ไม่ได้… แถมพอทำไป requirement ก็ยังเปลี่ยนแปลงให้ต้องกลับมาแก้กันอยู่ตลอดๆ แอพก็เหมือนเด็กที่ต้องมีวันเติบโต ต้องเปลี่ยนแปลงตามกาลเวลา ตามเทคโนโลยีที่เปลี่ยนไป ตามธุรกิจที่ต้องปรับตัว เพราะงั้นต่อให้ทำแอพมาดีแค่ไหน ก็ไม่มีแอพใดที่อยู่ได้ค้ำฟ้า<br>ทางออกที่พอรับได้สำหรับเดฟปากกัดตีนถีบก็คงจะหนีไม่พ้น..</p>
-<h2 id="Living-Document"><a href="#Living-Document" class="headerlink" title="Living Document"></a>Living Document</h2><p><strong><em>Technical Document ที่เปลี่ยนแปลงตามระบบที่เปลี่ยนไปอยู่ตลอดเวลา</em></strong></p>
-<p>สมัยเรียนหลายคนคงเคยชินกับวิชา SA ที่จัดให้เรียนพร้อมๆกับวิชาโปรเจค และ 2 วิชานี้ก็จะบูรณาการกันในเทอมนั้น วิชานึงส่งรายงาน Technical Specification อีกวิชาพรีเซนโปรแกรม และนั่นคือตัวอย่างของการทำ spec ชิ้นแรกที่พอทำเสร็จก็ไม่ได้กลับไปมองอีกเลย</p>
-<p>แต่ในหลายองค์กรที่เดฟหลายคน จากหลายทีมต้องทำงานร่วมกัน บางครั้งแค่ code มันไม่พอ มันจำเป็นที่จะต้องมีเอกสารประกอบที่สามารถอธิบายที่มาที่ไปของ code ชุดนั้นได้ หลายทีมพึ่งพา Wikipedia และหลายทีมก็ทำเว็บขึ้นมาเอง</p>
-<p>แต่ที่ถือว่าเปลี่ยนแปลงโลกของเดฟไปสู่มิติแห่งการเขียน spec คือการมาถึงของ XML (Extensible Markup Language) โดยองค์กร W3</p>
-<p>ความสามารถหลักๆคือการต่อขยายจาก programming language ใดก็ได้ เพราะทุก Compiler มีหน้าที่ที่ต้องอ่านมันออก และยังสามารถปรับโครงสร้างของตัวเองเพื่อรองรับการสื่อสารระหว่างระบบโดยเฉพาะ<br>และแน่นอน C# ก็ adopt สิ่งนี้มาใช้ในระบบให้เราสามารถใส่ XML comment ในจุดใดของโปรแกรมก็ได้ และยัง export ออกมาใช้งานได้สะดวกทุกครั้งที่มีการ Build โปรแกรมใหม่</p>
-<p>สังเกตเห็นอะไรมั้ยคะ…</p>
-<h2 id="export-XML-comment-ทุกครั้งที่มีการ-Build-โปรแกรมใหม่"><a href="#export-XML-comment-ทุกครั้งที่มีการ-Build-โปรแกรมใหม่" class="headerlink" title="export XML comment ทุกครั้งที่มีการ Build โปรแกรมใหม่"></a>export XML comment ทุกครั้งที่มีการ Build โปรแกรมใหม่</h2><p>นั่นหมายความว่าเราจะมีเสป็คใหม่ทุกครั้ง ถ้าเราขยันขันแข็ง maintain comment ที่กระจายอยู่ทั่วโปรแกรม</p>
-<h2 id="และเมื่อรวมมันเข้ากับ-Swagger-ละ…"><a href="#และเมื่อรวมมันเข้ากับ-Swagger-ละ…" class="headerlink" title="และเมื่อรวมมันเข้ากับ Swagger ละ…"></a>และเมื่อรวมมันเข้ากับ Swagger ละ…</h2><p>(Swagger Specification หรือ OpenAPI Specification คือเครื่องมือที่สามารถสร้างไฟล์ JSON จาก API Route เพื่อทำเป็น API Document ได้ อีกหนึ่งเทคโนโลยีที่ใช้ทำ Living Document)</p>
-<hr>
-<p>เป็นที่มาของสิ่งที่เราจะทำกันในวันนี้ค่ะ</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="/2020/08/07/living-document/living-document-stack.png" alt="living-document-tech-stack"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><em>ใหญ่นิดนึงนะคะ เอามาจากสไลด์สอนน้องที่ออฟฟิศ</em></td>
-</tr>
-</tbody></table>
-<p>Flow &gt;&gt; หลักการของมันไม่มีอะไรมาก เราจะใช้ swagger.json เพื่อสร้าง API Specification ซึ่งลำพัง Swagger ถือเป็น Living API Documentation อยู่แล้วเพราะจะ generate ใหม่ทุกครั้งที่ build จากนั้นเราจะแล้ว inject XML comment ที่เรา comment ทิ้งไว้ทั่ว code ลงไป</p>
-<p>ถ้าถามว่าทำไมต้อง Redoc ก็บอกได้คำเดียวว่าดูแล้วปวดตับน้อยกว่า SwaggerUI เยอะอยู่ค่ะ 5555</p>
-<h2 id="Pre-requisites-ของต้องมีก่อนเริ่ม-code"><a href="#Pre-requisites-ของต้องมีก่อนเริ่ม-code" class="headerlink" title="Pre-requisites (ของต้องมีก่อนเริ่ม code)"></a>Pre-requisites (ของต้องมีก่อนเริ่ม code)</h2><ol>
-<li>ASP.NET Core API Server (version ไหนก็ได้)</li>
-<li>Visual Studio Community 2019</li>
-</ol>
-<p>สิ่งแรกที่ต้องทำคือการ comment code โดยเฉพาะในส่วน API Controller ที่เราต้องการทำ Spec โดยอย่างน้อยให้ใช้ comment syntax ที่ครอบคลุมข้อมูลดังต่อไปนี้</p>
-<ol>
-<li>คำอธิบาย </li>
-<li>request parameters</li>
-<li>responses</li>
-<li>ตัวอย่าง model</li>
-</ol>
-<h2 id="เตรียม-XML-Comments"><a href="#เตรียม-XML-Comments" class="headerlink" title="เตรียม XML Comments"></a>เตรียม XML Comments</h2><p>API Controller</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> อัพเดตข้อมูลพยากรณ์อากาศ</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;id&quot;&gt;</span>ID ชุดข้อมูลที่ต้องการแก้ไข<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;weatherForecast&quot;&gt;</span>โมเดลของข้อมูลที่ต้องการแก้ไข<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>HTTP Status Code<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code=&quot;200&quot;&gt;</span>Successfully saved<span class="doctag">&lt;/response&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code=&quot;500&quot;&gt;</span>Bad Request<span class="doctag">&lt;/response&gt;</span></span></span><br><span class="line">[<span class="meta">HttpPut</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Put</span>(<span class="params"><span class="keyword">int</span> id, WeatherForecast weatherForecast</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br></pre></td></tr></table></figure>
-<p>Model</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeatherForecast</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> วันที่</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;example&gt;</span>3/1/2008 7:00:00<span class="doctag">&lt;/example&gt;</span></span></span><br><span class="line">        <span class="keyword">public</span> DateTime Date &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> อุณหภูมิ องศาเซลเซียส</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;example&gt;</span>36.6<span class="doctag">&lt;/example&gt;</span></span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> TemperatureC &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>จากนั้นให้เตรียม export ไฟล์ XML Comment ทุกครั้งที่ทำการ build ดังนี้</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="/2020/08/07/living-document/export-xml.png" alt="export xml setting"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><em>สิ่งสำคัญคือต้อง set ให้หยุดเตือน error 1591 ด้วยนะคะ ไม่งั้นต้องไล่ใส่ XML Comment ทุกที่</em></td>
-</tr>
-</tbody></table>
-<h2 id="Install-Swashbuckle-AspNetCore-Redoc"><a href="#Install-Swashbuckle-AspNetCore-Redoc" class="headerlink" title="Install Swashbuckle.AspNetCore + Redoc"></a>Install Swashbuckle.AspNetCore + Redoc</h2><figure class="highlight pm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Swashbuckle.AspNetCore -Version <span class="number">5.5</span>.<span class="number">0</span></span><br><span class="line">Install-Package Swashbuckle.AspNetCore.ReDoc -Version <span class="number">5.5</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Redoc-Up-and-running"><a href="#Redoc-Up-and-running" class="headerlink" title="Redoc: Up and running!"></a>Redoc: Up and running!</h2><p>Swashbuckle ประกอบไปด้วยการทำงาน 3 ส่วน<br>|<img src="/2020/08/07/living-document/swashbuckle-structure.png" alt="swashbuckle structure">|<br>|:–:|<br>|<em>ซึ่งเราจะ replace SwaggerUI ด้วย Redoc</em>|</p>
-<p>จะเริ่มใช้งาน Swagger ต้อง register service ให้กับ API container ของเราก่อนที่ Startup.cs</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            services.AddControllers();</span><br><span class="line">           </span><br><span class="line">            services.AddSwaggerGen();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>จากนั้นสั่งให้ทำงานเมื่อ runtime จงสร้าง swagger.json ขึ้นมา</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">if</span> (env.IsDevelopment())</span><br><span class="line">            &#123;</span><br><span class="line">                app.UseDeveloperExceptionPage();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            app.UseHttpsRedirection();</span><br><span class="line">            app.UseSwagger();</span><br><span class="line">            app.UseReDoc(config=&gt; &#123;</span><br><span class="line">                config.SpecUrl(<span class="string">&quot;/swagger/v1/swagger.json&quot;</span>);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            app.UseRouting();</span><br><span class="line"></span><br><span class="line">            app.UseEndpoints(endpoints =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                endpoints.MapControllers();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>โดยปกติคำสั่ง UseSwagger() จะทำให้ swagger.json เกิดขึ้นมาที่ default path ../swagger/v1/swagger.json แต่ Redoc มี default URI ของตัวเองที่ ../api-docs ดังนั้นจำเป็นต้อง config path ที่ถูกต้องที่ Redoc จะเข้าถึง swagger.json ได้ ไม่งั้น Something went wrong</p>
-<p>ถึงตรงนี้ ถ้าเปิด browser เรียก localhost:port/api-docs ขึ้นมาดูจะเห็น API Document ขึ้นมาแบบเรียบๆ ซึ่งถ้าใช้งานกันภายใน ปล่อยไว้อย่างนี้ก็ถือว่าพอใช้การได้แล้วค่ะ แต่อย่างที่เกริ่นไว้ เราจะเอา comment ที่อุตส่าห์เตรียมไว้ทั่วโปรแกรมมาใช้งานด้วย เพราะงั้น เข้าสู่โซนปรับแต่ swagger.json กันค่ะ</p>
-<h2 id="swagger-json-configuration"><a href="#swagger-json-configuration" class="headerlink" title="swagger.json configuration"></a>swagger.json configuration</h2><p>เป้าหมายของ blog นี้มีอย่างเดียวคือเอา xml comment มาใส่ ง่วงแล้วด้วยค่ะ สำหรับการปรับแต่งอื่นๆ เช่น ใส่ CSS, Authentication ปรับ index.html ขอละไว้โอกาสหน้า(ถ้ามี)</p>
-<p>ยังจำได้ path XML ที่เรา export ไว้ได้เนอะ &gt;&gt; bin\redoc-lesson-2.xml</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            services.AddControllers();</span><br><span class="line">           </span><br><span class="line">            services.AddSwaggerGen(config=&gt;&#123;</span><br><span class="line">                <span class="keyword">var</span> filepath = Path.Combine(AppContext.BaseDirectory, <span class="string">&quot;redoc-lesson-2.xml&quot;</span>);</span><br><span class="line">                config.IncludeXmlComments(filepath, includeControllerXmlComments: <span class="literal">true</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>run แล้วเข้าไปยลโฉมอีกครั้งจะได้เห็นอะไรประมาณนี้</p>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="/2020/08/07/living-document/redoc-ui.png" alt="redoc ui"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><em>แอบเอา logo ที่ออฟฟิศมาใช้ ไม่ได้ตั้งใจขายตรงจริงๆนะอย่ามองอย่างนั้น ส่วน logo ถ้าอยากใส่ให้ใช้ extension x-logo</em></td>
-</tr>
-</tbody></table>
-<p>จบตามเป้าหมาย ไว้พบกันใหม่บล็อคหน้าค่ะ</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/07/living-document/" data-id="ckdkepbuk0001zum8four28ob" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redoc-XML-C-swagger/" rel="tag">Redoc, XML, C#, swagger</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-start-a-journey" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/03/start-a-journey/" class="article-date">
@@ -224,7 +111,7 @@
 <li>push code ของเราขึ้นไปวางบน branch master ก่อนค่ะ มันจำเป็นต้องมี branch master เป็น branch แรก</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;new_repo</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
+<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#109;</a>:username/new_repo เอาแทนนะ</p>
 <h3 id="CI-CD-to-automatically-deploy-site-when-changes"><a href="#CI-CD-to-automatically-deploy-site-when-changes" class="headerlink" title="CI/CD to automatically deploy site when changes"></a>CI/CD to automatically deploy site when changes</h3><p>ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ </p>
 <p>ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ</p>
 <ol>
@@ -258,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckdkepbul0002zum876oq125l" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckdkex3jd0001ypreewb465xa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,23 +165,9 @@
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc-XML-C-swagger/" rel="tag">Redoc, XML, C#, swagger</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Redoc-XML-C-swagger/" style="font-size: 10px;">Redoc, XML, C#, swagger</a>
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
@@ -311,10 +184,6 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
-          </li>
         
           <li>
             <a href="/2020/08/03/start-a-journey/">Start a jouney with Hexo | NodeJS + Hexo + Travis CI + GitHub Pages</a>
