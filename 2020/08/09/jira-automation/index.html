@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation | Saintsitive - life journal;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ที่ออฟฟิศใช้อะไรจัดการงาน develop กันคะสำหรับ Builk One Group เราถนัดใช้ JIRA Cloud และวันนี้ จะพาทุกคนทัวร์ระบบรับแจ้งบัค&#x2F;แจ้งปัญหาการใช้งานแอพพลิเคชั่นโดยใช้ JIRA เพียวๆไม่พึ่ง code กันค่ะ  JIRA จาก">
+<meta property="og:type" content="article">
+<meta property="og:title" content="สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation">
+<meta property="og:url" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/index.html">
+<meta property="og:site_name" content="Saintsitive - life journal;">
+<meta property="og:description" content="ที่ออฟฟิศใช้อะไรจัดการงาน develop กันคะสำหรับ Builk One Group เราถนัดใช้ JIRA Cloud และวันนี้ จะพาทุกคนทัวร์ระบบรับแจ้งบัค&#x2F;แจ้งปัญหาการใช้งานแอพพลิเคชั่นโดยใช้ JIRA เพียวๆไม่พึ่ง code กันค่ะ  JIRA จาก">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/jira-automation.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/custom-fields-JIRA.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/add-issue-collector-JIRA.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/project-automation-JIRA-std.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/setting-automation-rule.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/jira-custom-field-id.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/test-transition-email-noti.png">
+<meta property="article:published_time" content="2020-08-09T23:46:52.000Z">
+<meta property="article:modified_time" content="2020-08-09T16:48:29.325Z">
+<meta property="article:author" content="Sirirat Rungpetcharat">
+<meta property="article:tag" content="JIRA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://saintsitive-dev.github.io/2020/08/09/jira-automation/jira-automation.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Saintsitive - life journal;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Saintsitive - life journal;</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://saintsitive-dev.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jira-automation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/09/jira-automation/" class="article-date">
+  <time datetime="2020-08-09T23:46:52.000Z" itemprop="datePublished">2020-08-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="ที่ออฟฟิศใช้อะไรจัดการงาน-develop-กันคะ"><a href="#ที่ออฟฟิศใช้อะไรจัดการงาน-develop-กันคะ" class="headerlink" title="ที่ออฟฟิศใช้อะไรจัดการงาน develop กันคะ"></a>ที่ออฟฟิศใช้อะไรจัดการงาน develop กันคะ</h2><p>สำหรับ Builk One Group เราถนัดใช้ JIRA Cloud และวันนี้ จะพาทุกคนทัวร์ระบบรับแจ้งบัค/แจ้งปัญหาการใช้งานแอพพลิเคชั่นโดยใช้ JIRA เพียวๆไม่พึ่ง code กันค่ะ</p>
+<p><img src="/2020/08/09/jira-automation/jira-automation.png" alt="jira-automation-stack"></p>
+<p>JIRA จากตระกูล Atlassian (เจ้าของเดียวกับ Bitbucket) เป็น Solution สำหรับบริหาร+จัดการการพัฒนา Software ในรูปแบบ Agile ที่พาวเวอร์ฟูลตรงที่สามารถสร้าง workflow ได้ดั่งใจปรารถนา (ก็ยังไม่ค่อยเจอข้อจำกัดนะคะ มีทรมานนิดหน่อยตอนที่ย้าย JIRA Cloud 2 organization มารวมกันเป็นอันเดียว) ล่าสุดก็ควบรวม Trello ไปแล้ว ก็แฮปปี้สำหรับคนใช้ Kanban สุดๆไปเลย</p>
+<p>เอาละเข้าเรื่องของเราดีกว่า</p>
+<p>เนื่องจากได้รับโจทย์ให้ทำระบบ Ticket issuing หรือก็คือระบบแจ้งปัญหาการใช้งานที่สามารถฝังตัวเองไว้ในหน้าเว็บได้ แต่ถ้าคุณโทรมาใน 30 นาทีนี้ เราแถมให้ไปเลย ระบบตอบกลับความเคลื่อนไหวทางอีเมล ฟรี!</p>
+<p>ขอเล่าถึงที่มาว่าทำไมถึงใช้ tool นี้นิดนึงก่อนเข้า tutorial นะคะ ใครไม่สนใจ อยากดู tutorial แล้ว ข้ามเส้น __ ไปได้เลย</p>
+<hr>
+<p>เมื่อนานแสนนานมาแล้ว เคยทำระบบเก็บบัคด้วย JIRA Issue Collector ฝังไว้หลังบ้านให้ usercare ที่ทำหน้าที่ซัพพอร์ตลูกค้าได้ใช้งาน เพราะย้อนกลับไป 8 ปีก่อน JIRA เหมือนป่าดิบชื้นค่ะ ไม่เป็นมิตรต่อสายตาของสายอาชีพอื่นอย่างมาก เรียกได้ว่าเข้ามาทางไหนก็หลง ตอนนี้คิดว่าดีขึ้นเยอะแล้วนะ 5555</p>
+<p>แต่ไม่ว่าจะหลงยังไง เวลามีบัคมา เขาเหล่านั้นก็ยังต้องแจ้งเราอยู่ดี แล้วที่ที่เราเหล่าเดฟอาศัยอยู่ก็คือใจกลางป่าดิบชิ้น JIRA scrum board นั้นน่ะเอง ถ้าใครเคยใช้จะรู้ว่าเมื่อก่อนกว่าจะเข้าไปถึงจุดนั้นได้คือผ่านหลายคลิกมาก</p>
+<p>สุดท้ายเลยตัดสินใจทำทางเข้าไว้ให้เข้าถึงได้ง่ายด้วย JIRA Issue Collector ซึ่งเป็น feature นึงที่มีอยู่ใน Project classic type เท่านั้น (ยังไม่ได้เช็คว่า new gen จะทำมั้ย แต่ภาวนาขอให้ทำ) แล้วเอา code ที่ได้ไปฝังไว้ในเว็บเพื่อให้คนแจ้งบัคใช้งาน</p>
+<p>ทีนี้คนแจ้งก็สามารถกด float tab แจ้งบัคจากในเว็บ กรอก field ต่างๆใน popup ที่เด้งขึ้นมาแล้วส่ง card ให้คนที่สิง backlog เห็นได้ทันท่วงที</p>
+<h2 id="ตรง-requirement-เด๊ะ"><a href="#ตรง-requirement-เด๊ะ" class="headerlink" title="ตรง requirement เด๊ะ"></a>ตรง requirement เด๊ะ</h2><p>และไม่นานมานี้ เราได้สังเกตเห็นปุ่มนึงโผล่ขึ้นมาใน JIRA เป็นรูปสายฟ้า พอลองเล่นดูก็พบว่า อ่อ มันคือ automation rules ที่สามารถใส่เพิ่มได้แบบสะดวกมาก อิจฉาคนใช้งานสมัยนี้จริงๆ 555555</p>
+<p>(ยังจำภาพความลำบากเมื่อก่อนที่ต้องผสมผสาน workflows+notification scheme เพื่อจะส่งเมลแบบเดียวกันเนี่ยแหละได้เป็นอย่างดี)</p>
+<p>งั้นเราจะรับบัคมาอย่างเดียวทำไม ก็ออกแบบให้พอแก้เสร็จก็แจ้งกลับได้อัตโนมัติกันไปเลยดีกว่า!</p>
+<hr>
+<h2 id="1-สร้าง-field-Email"><a href="#1-สร้าง-field-Email" class="headerlink" title="1. สร้าง field Email"></a>1. สร้าง field Email</h2><p>งงละสิ ทำไมสร้าง Field อีเมลก่อน มันค่อนข้างเป็นหลักการ programming นิดนึง ในทางโปรแกรมเมอร์เราเรียกกันว่า <em>การประกาศตัวแปร</em> (เพื่อจอง memory เอาไว้ใช้)</p>
+<p>ซึ่ง field Email นี้เราเตรียมจะเอาไปใช้ใน form ที่จะให้ user กรอกในภายหลัง ดังนั้นเราเลยจะสร้างเตรียมไว้ก่อน (จริงๆสร้างทีหลังก็ได้ แต่ก็ต้องกลับมาแก้ไข form ใหม่อีกรอบ)</p>
+<p>และแน่นอน field นี้สามารถเอาไปใช้ได้อีกหลายโปรเจค และจะสร้างอีกกี่ field ก็ได้ตามอัธยาศัย</p>
+<h3 id="ไปที่-JIRA-Settings-gt-Issues-gt-Custom-fields-gt-Create-custom-field"><a href="#ไปที่-JIRA-Settings-gt-Issues-gt-Custom-fields-gt-Create-custom-field" class="headerlink" title="ไปที่ JIRA Settings &gt; Issues &gt; Custom fields &gt; Create custom field"></a><strong>ไปที่ JIRA Settings &gt; Issues &gt; Custom fields &gt; Create custom field</strong></h3><p><img src="/2020/08/09/jira-automation/custom-fields-JIRA.png" alt="custom-fields-JIRA"></p>
+<p>เลือก Text Field (single line) แล้วกรอกชื่อ field ไว้ว่า Email</p>
+<h2 id="2-ใส่-field-ที่สร้างใหม่ให้โปรเจค"><a href="#2-ใส่-field-ที่สร้างใหม่ให้โปรเจค" class="headerlink" title="2. ใส่ field ที่สร้างใหม่ให้โปรเจค"></a>2. ใส่ field ที่สร้างใหม่ให้โปรเจค</h2><h3 id="ไปที่-Custom-fields-gt-เลือก-field-ใหม่ที่เพิ่งสร้าง-gt-…-gt-Associate-to-Screens"><a href="#ไปที่-Custom-fields-gt-เลือก-field-ใหม่ที่เพิ่งสร้าง-gt-…-gt-Associate-to-Screens" class="headerlink" title="**ไปที่ Custom fields &gt; เลือก field ใหม่ที่เพิ่งสร้าง &gt; … &gt; Associate to Screens **"></a>**ไปที่ Custom fields &gt; เลือก field ใหม่ที่เพิ่งสร้าง &gt; … &gt; Associate to Screens **</h3><p>ติ๊กเลือกโปรเจคที่ต้องการสร้างระบบ Issue Collector กด update ที่ท้ายหน้าจอด้วยนะคะ 5555 โปรเจคเราเยอะมากจนลืมกด update แล้วก็มานั่งงงว่าทำไมมันไม่เปลี่ยนวะ? เป็นประจำ </p>
+<p>ฝันให้ Jira มี autosaved แต่ก็ยังไม่เป็นจริง…</p>
+<h2 id="3-Setting-JIRA-Issue-Collector"><a href="#3-Setting-JIRA-Issue-Collector" class="headerlink" title="3. Setting JIRA Issue Collector"></a>3. Setting JIRA Issue Collector</h2><p><em>โปรเจค classic เท่านั้นที่จะมี feature นี้นะคะ</em></p>
+<h3 id="ไปที่-Project-เป้าหมาย-gt-Project-Settings-gt-Issue-Collector-gt-Add-issue-collector"><a href="#ไปที่-Project-เป้าหมาย-gt-Project-Settings-gt-Issue-Collector-gt-Add-issue-collector" class="headerlink" title="ไปที่ Project เป้าหมาย &gt; Project Settings &gt; Issue Collector &gt; Add issue collector"></a>ไปที่ Project เป้าหมาย &gt; Project Settings &gt; Issue Collector &gt; Add issue collector</h3><p><img src="/2020/08/09/jira-automation/add-issue-collector-JIRA.png" alt="add-issue-collector-JIRA"></p>
+<p>JIRA Issue Collector ประกอบไปด้วย 3 ส่วน</p>
+<ul>
+<li><strong>Issue Collector Setting</strong> (สีแดง) กางกรอบแดงพลาดค่ะ จริงๆมันเริ่มตั้งแต่ name แหละส่วนแรก จุดสำคัญคือ Reporter ตรงนี้จะกรอกลงไปได้แค่คนที่มี account jira ค่ะ จึงเป็นเหตุให้เราต้องไปสร้างกล่อง email เพื่อรับ email ของลูกค้าเพิ่มเพื่อทำการตอบกลับ</li>
+<li><strong>Trigger Setting</strong> (สีน้ำเงิน) สามารถปรับแต่งการแสดงผลได้หลากหลายค่ะ ยิ่งถ้าเลือก custom คือแก้ behavior แก้จุดจัดวางปุ่มกันได้เลยทีเดียว</li>
+<li><strong>Issue Form</strong> (สีเขียว) สามารถเลือกได้ว่าอยากให้คนแจ้งกรอกข้อมูลอะไรบ้าง และที่สำคัญคือสามารถเพิ่มกล่อง email ของเราลงไปได้ และถ้าเลื่อนลงไปท้ายดูในส่วน preview ก็จะเห็นสภาพ form ที่จะโผล่มาให้ผู้ใช้งานกรอกอีกด้วย</li>
+</ul>
+<p>สร้างเสร็จแล้วอย่าลืม save</p>
+<h2 id="4-Setting-JIRA-Automation-Rules"><a href="#4-Setting-JIRA-Automation-Rules" class="headerlink" title="4. Setting JIRA Automation Rules"></a>4. Setting JIRA Automation Rules</h2><h3 id="ไปที่-Project-เป้าหมาย-gt-Project-Settings-gt-Automation-gt-Create-rule"><a href="#ไปที่-Project-เป้าหมาย-gt-Project-Settings-gt-Automation-gt-Create-rule" class="headerlink" title="ไปที่ Project เป้าหมาย &gt; Project Settings &gt; Automation &gt; Create rule"></a><strong>ไปที่ Project เป้าหมาย &gt; Project Settings &gt; Automation &gt; Create rule</strong></h3><p><img src="/2020/08/09/jira-automation/project-automation-JIRA-std.png" alt="project-automation-JIRA-std"></p>
+<p>บอกเลยว่า endless possibilities ค่ะ 55555 (มี incoming webhook ด้วย คือสบายใจละ)</p>
+<p>แต่ flow ของเราครั้งนี้จะลองทำอย่างง่าย rule เดียวก่อน คือเมื่อปัญหาแก้เสร็จเรียบร้อยค่อยส่งเมลแจ้ง</p>
+<ol>
+<li>เลือก Issue transitioned</li>
+<li>เลือก To สถานะ Done</li>
+<li>เลือก New Action &gt; Send email</li>
+</ol>
+<p><img src="/2020/08/09/jira-automation/setting-automation-rule.png" alt="setting-automation-rule"></p>
+<p>มาถึงตรงนี้จะ tricky นิดนึงค่ะ</p>
+<p>ช่อง To เนี่ย ถ้าเลือกไปมันจะไม่มีกล่อง Email ที่เราสร้างมาใหม่ แต่เราสามารถเอาค่าจาก custom fields มาใส่ได้โดยการใช้ feature <em>smart value</em>  แต่ลำบากนิดนึงค่ะ คือต้องเอา custom field ID มาใส่ในรูปแบบนี้</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;issue.customField_xxxxx&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>ไหนบอกไม่มี code 5555 นิดนึงอ่ะเนอะ</p>
+<p>แล้วจะไปเอา ID นั้นมาจากไหน ให้กลับไปที่หน้ารวม Custom fields ของเราที่ JIRA Settings &gt; Issues &gt; Custom fields &gt; field เป้าหมาย &gt; … &gt; Edit Custom Field Details</p>
+<p><img src="/2020/08/09/jira-automation/jira-custom-field-id.png" alt="jira-custom-field-id"></p>
+<p>นั่นแหละไอดีของ field ของเรา ย้อนกลับไปเติมเต็มข้อมูลให้เรียบร้อยแล้วลองทดสอบการใช้งานดูได้เลยค่ะ</p>
+<p><img src="/2020/08/09/jira-automation/test-transition-email-noti.png" alt="test-transition-email-noti"></p>
+<p>ก่อนส่งให้ลูกค้า อย่าลืมปรับหน้าตาอีเมลกันนะคะ ^^</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://saintsitive-dev.github.io/2020/08/09/jira-automation/" data-id="ckdnbmyjt00012sr897qy6aui" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/07/living-document/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/" rel="tag">swagger</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/JIRA/" style="font-size: 10px;">JIRA</a> <a href="/tags/Redoc/" style="font-size: 10px;">Redoc</a> <a href="/tags/XML/" style="font-size: 10px;">XML</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/09/jira-automation/">สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/03/start-a-journey/">Start a jouney with Hexo | NodeJS + Hexo + Travis CI + GitHub Pages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Sirirat Rungpetcharat<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
