@@ -1,7 +1,10 @@
 ---
 title: สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation
-tags: [JIRA]
+tags:
+  - JIRA
+date: 2020-08-09 23:46:52
 ---
+
 
 ## ที่ออฟฟิศใช้อะไรจัดการงาน develop กันคะ
 
