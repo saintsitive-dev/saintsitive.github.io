@@ -6,7 +6,7 @@
 title: Saintsitive - life journal;
 subtitle: 'Not so introvert life'
 description: ''
-keywords:
+keywords: developer
 author: Sirirat Rungpetcharat
 language: en
 timezone: ''
@@ -104,3 +104,10 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: ''
+
+# Emoji
+emoji:
+  enable: true
+  className: github-emoji
+  styles:
+  customEmojis:
