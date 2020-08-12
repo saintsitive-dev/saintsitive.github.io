@@ -1,7 +1,16 @@
 ---
-title: JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย
-tags: [Java, JMeter, Stress test, Load test, Performance test, conceptual, testing]
+title: 'JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย'
+tags:
+  - Java
+  - JMeter
+  - Stress test
+  - Load test
+  - Performance test
+  - conceptual
+  - testing
+date: 2020-08-12 20:00:01
 ---
+
 
 ### เนื้อหาในบทความ
 1. [ทำไม JMeter?](#whyjmeter)
