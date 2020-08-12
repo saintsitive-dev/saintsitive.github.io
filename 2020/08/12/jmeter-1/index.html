@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย | Saintsitive - life journal;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="เนื้อหาในบทความ ทำไม JMeter? JMeter ทำงานยังไง? โครงสร้างภายในของ JMeter Run GUI JMeter องค์ประกอบของ Test plan  เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ user พร้อมๆกันได้ขนาดไหนเพื่อจะหาคำตอบให้ได">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย">
+<meta property="og:url" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/index.html">
+<meta property="og:site_name" content="Saintsitive - life journal;">
+<meta property="og:description" content="เนื้อหาในบทความ ทำไม JMeter? JMeter ทำงานยังไง? โครงสร้างภายในของ JMeter Run GUI JMeter องค์ประกอบของ Test plan  เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ user พร้อมๆกันได้ขนาดไหนเพื่อจะหาคำตอบให้ได">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-conceptual.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-workflow.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-structure.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-gui-5_3.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-elements.png">
+<meta property="article:published_time" content="2020-08-12T20:00:01.000Z">
+<meta property="article:modified_time" content="2020-08-12T13:01:30.868Z">
+<meta property="article:author" content="Sirirat Rungpetcharat">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JMeter">
+<meta property="article:tag" content="Stress test">
+<meta property="article:tag" content="Load test">
+<meta property="article:tag" content="Performance test">
+<meta property="article:tag" content="conceptual">
+<meta property="article:tag" content="testing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/jmeter-conceptual.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Saintsitive - life journal;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Saintsitive - life journal;</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://saintsitive-dev.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jmeter-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/12/jmeter-1/" class="article-date">
+  <time datetime="2020-08-12T20:00:01.000Z" itemprop="datePublished">2020-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="เนื้อหาในบทความ"><a href="#เนื้อหาในบทความ" class="headerlink" title="เนื้อหาในบทความ"></a>เนื้อหาในบทความ</h3><ol>
+<li><a href="#whyjmeter">ทำไม JMeter?</a></li>
+<li><a href="#howjmeter">JMeter ทำงานยังไง?</a></li>
+<li><a href="#jmeterstructure">โครงสร้างภายในของ JMeter</a></li>
+<li><a href="#runjmeter">Run GUI JMeter</a></li>
+<li><a href="#jmetertestplan">องค์ประกอบของ Test plan</a></li>
+</ol>
+<h2 id="เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ-user-พร้อมๆกันได้ขนาดไหน"><a href="#เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ-user-พร้อมๆกันได้ขนาดไหน" class="headerlink" title="เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ user พร้อมๆกันได้ขนาดไหน"></a>เมื่อวันนึงเกิดสงสัยว่าเว็บที่เราทำมามันรับ user พร้อมๆกันได้ขนาดไหน</h2><p>เพื่อจะหาคำตอบให้ได้ มันคงไม่ใช่การเอาพนักงาน 100 กว่าชีวิตในบริษัทมานั่งกดปุ่ม login พร้อมๆกัน นอกจากจะไม่ productive แล้วยังเป็นไปไม่ได้ในชีวิตจริง แต่การจะให้ไปจัดงาน workshop ระดม user ตัวเป็นๆมานับพันแล้วมากดปุ่ม login พร้อมกันก็คงไม่ใช่ทางออกที่ดี เพราะบางทีเว็บเราอาจรับได้แค่ 500 แล้วตายไปต่อหน้าต่อตา user นับพันก็เป็นได้</p>
+<h3 id="ก็มาถึงจุดที่ต้องหา-tool-อะไรสักอย่างมาทดสอบให้รู้เรื่องกันไป"><a href="#ก็มาถึงจุดที่ต้องหา-tool-อะไรสักอย่างมาทดสอบให้รู้เรื่องกันไป" class="headerlink" title="ก็มาถึงจุดที่ต้องหา tool อะไรสักอย่างมาทดสอบให้รู้เรื่องกันไป"></a>ก็มาถึงจุดที่ต้องหา tool อะไรสักอย่างมาทดสอบให้รู้เรื่องกันไป</h3><p>เครื่องมือมันมีหลากหลายแต่ในวันนี้ที่เลือกมาคือ JMeter</p>
+<p><img src="/2020/08/12/jmeter-1/jmeter-conceptual.png" alt="jmeter-conceptual"></p>
+<p>JMeter เป็นเครื่องมือในการทำ Performance testing อย่างนึง ที่ประด้วย Load test (ทดสอบว่ารับ concurrent ได้เยอะแค่ไหน) + Stress test (ทดสอบว่ารับ concurrent และ data package ได้เยอะแค่ไหน) เหมาะมากที่จะเอาไว้เป็นเครื่องมือหาคอขวดในระบบ</p>
+<hr>
+<h2 id="ทำไม-JMeter"><a href="#ทำไม-JMeter" class="headerlink" title="ทำไม JMeter?"></a><a name="whyjmeter">ทำไม JMeter?</a></h2><ol>
+<li>เพราะมันฟรี เป็น open source</li>
+<li>เป็น Java ซึ่งเป็นหนึ่งในภาษาที่เร็วชิบหายวายป่วงถ้าใช้เพียวๆ เหมาะมากที่จะเอามาเล่นอะไรแบบนี้ จะทดสอบ performance คนอื่น ตัวเองก็ต้องเร็วก่อนอ่ะเนอะ</li>
+<li>และเพราะมันเป็น Java จะรันมันขึ้นมา ขอแค่ลง jdk ซึ่งลงได้ทุกระบบปฏิบัติการณ์อยู่แล้ว เลยคิดว่าไม่น่าจะติดอะไร (ซึ่งหมายความว่าพอถึงเวลาต้อง production จริงจัง ก็น่าจะไม่ติดด้วยเช่นกัน)</li>
+<li>คนทั่วไปเค้าเคลมกันว่า หน้าตามันเป็นมิตร ใช้งานง่าย ซึ่งเราก็ตกหลุม หลงเชื่อคนอื่นไป</li>
+<li>มี extension libraries ที่หลากหลาย และเอามาต่อกับ Selenium ได้ด้วย ดีเลยที่บริษัทมี Robot testing ถ้าถึงเวลาเอามาพ่วงท้าย robot testing ของทีม QA ของเรามันคงจะดีไม่น้อย</li>
+<li>มันแสดงผลได้หลากหลาย แต่เอาตรงๆไม่ได้คาดหวังสิ่งนั้นจาก tool นี้ค่ะ เพราะ grafana หรือ tool สร้างกราฟอื่นๆน่าจะกินขาด</li>
+</ol>
+<p>ด้วยข้อดีประมาณนี้ เลยตัดสินใจให้เราเลือกสิ่งนี้มาเป็นของเล่นในวันนี้ค่ะ</p>
+<h2 id="แต่พอได้ลองเล่นจริง-มันไม่ง่ายค่ะ-555555555-แม่งเอ้ย"><a href="#แต่พอได้ลองเล่นจริง-มันไม่ง่ายค่ะ-555555555-แม่งเอ้ย" class="headerlink" title="แต่พอได้ลองเล่นจริง มันไม่ง่ายค่ะ 555555555 แม่งเอ้ย"></a>แต่พอได้ลองเล่นจริง มันไม่ง่ายค่ะ 555555555 แม่งเอ้ย</h2><p>ต้องขอออกตัวก่อนว่าเราเป็นสาย เจอปุ๊บ ลองปั๊บ ถ้าติดขัดถึงจะกลับมาอ่าน doc ทีหลัง 55555 (ไม่ดี อย่าหาทำ) จริงๆมันก็ไม่ถึงกับลงมือเลยขนาดนั้นหรอกค่ะ เพราะในจังหวะที่เลือกก็ research มาระดับนึงแล้ว แต่ตอนลงมือเนี่ย ชอบลงไปจับทุกอย่างก่อน มันมีเสน่ห์ในการได้ลองมั่วดูก่อน ไม่รู้ทำไม นิสัยนี้แก้ไม่หายจริงๆ</p>
+<p>แต่เพราะไปลองมั่วมาแล้ว เลยตัดสินใจว่า เอ้อ สำหรับ tool นี้ ถ้าไม่อ่านก่อน ทำความเข้าใจมันก่อน ไม่เวิร์คหรอก ทำไปอ่ะทำได้ แต่จะไม่เข้าใจถึงการได้มาซึ่งผลลัพธ์ <em>มันไม่สนุก</em></p>
+<p>เป็นที่มาที่เราเปลี่ยนใจ ตอนแรกจะอัด tutorial ให้จบใน blog เดียว <em>ไม่เอาละ</em> ขอพื้นที่อธิบายความเป็น JMeter ก่อนดีกว่า ถ้าเราจะหอบหิ้วไปสอนน้องๆต่อ ก็อยากจะสอนเพื่อให้น้องๆเข้าใจไส้ เข้าใจที่มาที่ไป ก่อนลงมือทำเหมือนกัน</p>
+<hr>
+<h2 id="JMeter-ทำงานยังไง"><a href="#JMeter-ทำงานยังไง" class="headerlink" title="JMeter ทำงานยังไง?"></a><a name="howjmeter">JMeter ทำงานยังไง?</a></h2><p>การทำงานของ JMeter มีหลักการคร่าวๆคือ <em>การสร้าง Test Plan แล้วรัน Test Plan นั้นผ่าน proxy ไปหา Server เพื่อป้อน request หน้าตาและปริมาณตามที่กำหนดให้ server เป้าหมายเพื่อเก็บ response ของ server นั้นๆมาสร้างผลลัพท์ค่ะ</em> ดูรูปประกอบ (อาร์ตเวิร์คทุกอย่างสร้างด้วย google slides)</p>
+<p><img src="/2020/08/12/jmeter-1/jmeter-workflow.png" alt="jmeter-workflow"></p>
+<p>(สำหรับเวอร์ชั่นเก่า JMeter มีคอนเซปท์ที่เรียกว่า workbench เอาไว้แสดงผลที่เป็นผลลัพท์จากการรัน Test plan รอบนั้นๆ แต่ตอนนี้ไม่มีแล้วนะคะ ถือเป็น non-testing element ทั้งหมด)</p>
+<p>หลักการสั้นมาก แต่การสร้าง Test plan นั้น config ได้หลากหลายตามความซับซ้อนของระบบที่เราต้องการทดสอบ มันยากเพราะเว็บของเรามันมี authentication มันมี ssl มันมี WAF การจะออกแบบ request ไปหลอกเว็บเราที่ก็มี security ระดับนึงว่านี่คนนะ ไม่ใช่บอทต้องสงสัยที่ไหน (แต่จริงๆเราคือบอท 555) ก็เลยกลายเป็นเรื่องยากไปเลยโดยอัตโนมัติ</p>
+<hr>
+<h2 id="โครงสร้างภายในของ-JMeter"><a href="#โครงสร้างภายในของ-JMeter" class="headerlink" title="โครงสร้างภายในของ JMeter"></a><a name="jmeterstructure">โครงสร้างภายในของ JMeter</a></h2><p>มาดูกันหน่อยว่าพอ download JMeter มาแล้วเราได้อะไรมาบ้าง</p>
+<p><img src="/2020/08/12/jmeter-1/jmeter-structure.png" alt="jmeter-structure"></p>
+<p>ด้วยความที่ไม่ต้อง install เวลาเรียกใช้งานจะเป็นการเรียก script ใน bin เพราะงั้นอย่าวางไว้ใน folder ลึกมากนะคะ เวลาเขียน command จะเสียใจภายหลัง 5555</p>
+<p>โฟลเดอร์ที่เราสนใจในตอนนี้มีแค่นี้</p>
+<ul>
+<li>bin - script ต่างๆที่เราใช้รันให้ JMeter ทำงานจะอยู่ในนี้ และรวมถึง template test plan ต่างๆที่ JMeter มีให้มาเป็นเบื้องต้นด้วย</li>
+<li>lib - core libraries, protocols, components ของ JMeter และ extension อย่างที่บอกว่า JMeter สามารถเอา extension มาใส่เพิ่มเติมเพื่อใช้งานได้ในรูปแบบการเอา libraries นอกมาใส่ ถ้าเปิดดูข้างในก็จะเห็นว่ามี lib เบื้องต้นอยู่เพียบไปหมด (มีกระทั่ง font-awesome 555)</li>
+</ul>
+<p>ส่วนที่เหลือเป็นอื่นๆ และพวก document การใช้งาน JMeter</p>
+<hr>
+<h2 id="Run-GUI-JMeter"><a href="#Run-GUI-JMeter" class="headerlink" title="Run GUI JMeter"></a><a name="runjmeter">Run GUI JMeter</a></h2><p><img src="/2020/08/12/jmeter-1/jmeter-gui-5_3.png" alt="jmeter-gui"></p>
+<p>JMeter นี่มันเปิดได้ 3 วิธี</p>
+<ul>
+<li><strong>GUI</strong> - Run bin/jmeter.bat เพื่อเปิด JMeter GUI ก็จะได้หน้าตาแบบข้างบน</li>
+<li><strong>CLI</strong> - Run command ข้างล่างในโฟลเดอร์ bin</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmeter -n -t &lt;ชื่อ test plan&gt; -l &lt;ชื่อไฟล์ที่จะใช้เก็บผลลัพท์&gt; -H &lt;proxy server&gt; -P &lt;port&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Server mode</strong> Run bin/jmeter-server.bet ถ้ารันในโหลดนี้จะสามารถกระจาย thread ได้ เทสได้ไวขึ้น</li>
+</ul>
+<p>มันมีสาเหตุที่เราควรใช้ cli มากกว่า gui เพราะตอนลองรันโดยใช้ gui แบบ thread เดียว รอบเดียว ยิง https request 2 หน้าจอ ผลที่ออกมา 300 responses นี่ทำคอมเรา RAM 16GB ถึงกับค้างไป (แต่ตอนนั้นก็ทำอย่างอื่นอีกหลายๆอย่างๆไปด้วยแหละ แหะๆ) เพราะฉะนั้นถ้าจะ load test ใส่สัก 1000 thread ก็อย่าใช้ gui เลยค่ะ สงสารเครื่องเนอะ</p>
+<p>ถึงตรงนี้ขอพูดถึงตัว GUI นิดนึงนะคะ หลังจากเปิดมาจะมี 2 panels ซ้ายมือคือ Test plan และขวามือคือ configuration หรือ detail ของสิ่งที่เราเลือกมาจากทาง panel ซ้ายค่ะ</p>
+<hr>
+<h2 id="องค์ประกอบของ-Test-plan"><a href="#องค์ประกอบของ-Test-plan" class="headerlink" title="องค์ประกอบของ Test plan"></a><a name="jmetertestplan">องค์ประกอบของ Test plan</a></h2><p><em>นี่คือหัวใจของ JMeter ค่ะ</em></p>
+<p>Test plan เกิดจากการเอา <strong>JMeter element</strong> ต่างๆมาประกอบกันเป็นลำดับ activity เพื่อให้ <strong>Thread Group</strong> ที่เปรียบเสมือน user เอา activity ดังกล่าวไปกระทำบน server เป้าหมาย จากนั้นตั้ง <strong>Listener</strong> รอรับผลมาแสดงตามรูปแบบที่กำหนด</p>
+<p>เห็นตัวหนามั้ยคะ</p>
+<p>นั่นคือ องค์ประกอบทั้ง 3 ที่ทำให้เกิด test plan ขึ้นมา 1 plan</p>
+<p><img src="/2020/08/12/jmeter-1/jmeter-elements.png" alt="jmeter-elements"></p>
+<p><strong>Thread Group</strong> - กำหนดปริมาณของ user และพฤติกรรมเบื้องต้นเช่น ทำแต่ละ action ช้าเร็วขนาดไหนได้ <em>1 test plan มีมากกว่า 1 thread group ได้นะ</em> เพื่อนำเสนอกิจกรรมของ user แต่ละกลุ่มที่แตกต่างกัน แต่ถ้าทำแบบนั้นอาจทำให้ตัวแปรมันเยอะเกินจะวิเคราะห์ได้ ต้องระวัง</p>
+<p><strong>Elements</strong> - ลำดับกิจกรรมต่างๆที่เราสามารถกำหนดให้ user ไปทำได้ โดยประกอบไปด้วย 2 elements ที่เราจะใช้บ่อย</p>
+<ol>
+<li><strong>Sampler</strong> ตัวกิจกรรมหลักๆ <em>(แปล: ตัวอย่างกิจกรรม)</em> ถ้าสมมุติเราจะทดสอบการเข้าเว็บ เราจะสร้าง Sampler &gt; HTTP Request เป็นการบอกว่าเรากำลังจะยิง HTTP Request ไปหา Server เป้าหมาย</li>
+<li><strong>Controller</strong> ตัวควบคุมลำดับของ Sampler อีกที เพราะการท่องเว็บมีลำดับของมัน เช่น อาจต้องยิง HTTP Request login ก่อน เพื่อผ่านหน้า login เข้าไปในเว็บให้ได้ แล้วค่อยยิง HTTP Request logout ออกมา (แล้วจะเข้าไปทำไม..)</li>
+</ol>
+<p><strong>Listener</strong> - ตัวแสดงผลลัพท์ มีมากกว่า 1 ได้เหมือนกันค่ะในแต่ละรอบการเทส เช่น อยากได้ผลลัพท์กราฟ 1 อัน กับผลลัพท์แบบตารางอีก 1 อัน ก็สร้างไว้เลย 2 listener แต่หลักการจริงๆคือ listener จะอ่าน response ที่ถูกบันทึกไว้ในไฟล์ xml แล้วมาแสดงผลเฉยๆค่ะ ไม่ต้องกลัวว่ามันจะเก็บผลแยกกัน</p>
+<hr>
+<p>เขียนมามากมาย แต่คิดว่าน่าจะพอสำหรับการไปเริ่มลงมือทำจริงกันแล้วในบล็อคหน้า ซึ่งสิ่งที่เราจะทำกันก็คือ</p>
+<h3 id="“บันทึกการท่องเว็บของเราเองด้วย-JMeter-Recording-script-แล้วเอามารันในระดับ-1000-concurrent”"><a href="#“บันทึกการท่องเว็บของเราเองด้วย-JMeter-Recording-script-แล้วเอามารันในระดับ-1000-concurrent”" class="headerlink" title="“บันทึกการท่องเว็บของเราเองด้วย JMeter Recording script แล้วเอามารันในระดับ 1000 concurrent”"></a>“บันทึกการท่องเว็บของเราเองด้วย JMeter Recording script แล้วเอามารันในระดับ 1000 concurrent”</h3><p>จะตื่นเต้นขนาดไหน server จะล่มมั้ย โปรดติดตามตอนต่อไปค่ะ <span class="github-emoji" alias="wink" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8">&#x1f609;</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/" data-id="ckdrdunez0002y9o00a0ucnef" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/09/jira-automation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/" rel="tag">swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/JIRA/" style="font-size: 10px;">JIRA</a> <a href="/tags/JMeter/" style="font-size: 10px;">JMeter</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Load-test/" style="font-size: 10px;">Load test</a> <a href="/tags/Performance-test/" style="font-size: 10px;">Performance test</a> <a href="/tags/Redoc/" style="font-size: 10px;">Redoc</a> <a href="/tags/Stress-test/" style="font-size: 10px;">Stress test</a> <a href="/tags/XML/" style="font-size: 10px;">XML</a> <a href="/tags/conceptual/" style="font-size: 10px;">conceptual</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/testing/" style="font-size: 10px;">testing</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/12/jmeter-1/">JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/09/jira-automation/">สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/03/start-a-journey/">Start a jouney with Hexo | NodeJS + Hexo + Travis CI + GitHub Pages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Sirirat Rungpetcharat<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
