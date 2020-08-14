@@ -91,16 +91,42 @@
 <p>เรื่องมันเริ่มมาจาก เมื่อคืนลง extension ใน visual studio code แล้วพบว่า warning งอกทั่วทุกหัวระแหงก่อนจะค่อยๆ rebuild แล้วกลับเป็นปกติยกเว้นบางไฟล์ที่ยังแดงเถือกไม่หาย และ 1 ในนั้นก็พาให้เราไปเจอกับ code ชุดนึงเข้า</p>
 <p><img src="/2020/08/15/c-sharp-8/unreachable-break.png" alt="unreachable code"></p>
 <h2 id="มีคนวาง-break-ไว้หลัง-return"><a href="#มีคนวาง-break-ไว้หลัง-return" class="headerlink" title="มีคนวาง break ไว้หลัง return"></a>มีคนวาง break ไว้หลัง return</h2><p>ใจดำอำมหิตอะไรเยี่ยงนี้ 5555 break จะไม่มีวันได้เห็นเดือนเห็นตะวัน ไม่มีวันได้สัมผัสการ debug ใดใด เพราะ cursor ทั้งหลายจะโดน return ดีดออกจาก method ไปจนหมด</p>
-<h3 id="แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน"><a href="#แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน" class="headerlink" title="แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน"></a>แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน</h3><p>แต่ switch case มันใช้กับ break และ default นี่หว่า 4 สหายที่ใช้กันมาแต่โบราณกาล แล้วถ้าไม่มี break ทิ้งไว้แค่ return มันจะได้เหรอ มันทำงานคนละอย่างกันเลยนะ…</p>
+<h3 id="แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน"><a href="#แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน" class="headerlink" title="แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน"></a>แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน</h3><p>แต่ switch case มันใช้กับ break และ default นี่หว่า 4 สหายที่ใช้กันมาแต่โบราณกาล แล้วถ้าไม่มี break ทิ้งไว้แค่ return มันก็ได้แหละ แต่ทำไมมันรู้สึกขัดใจแปลกๆวะ หรือเพราะมันทำงานคนละอย่างกัน…</p>
 <p><em>(สาระ - break จะดีดเราออกจาก switch case แล้วไปต่อบรรทัดล่างของ method นี้ ในขณะที่ return จะดีดเราออกจาก method ไปเลย)</em></p>
-<p>งั้น use case ที่ใช้ switch case + return นี่มันใช้กับอะไรละเนี่ย พอสงสัยก็เลยเริ่มเซิสค่ะ แต่พอเซิสกลับพบว่ามันมีรูปแบบการเขียน switch case ใหม่ๆโผล่มาอีกมากมาย และจุดเปลี่ยนล่าสุดแห่งวงการ switch case ก็เป็น feature ที่ปรับ concept ของ switch case ที่มาพร้อมกับ C# version 8.0 ที่เพิ่งจุดระเบิดเปิดตัวไปเมื่อไม่นานนี้เอง</p>
-<p>From Statement to Expression</p>
-<p>switch case new style</p>
+<p>งั้น use case ที่ใช้ switch case + return นี่มันใช้กับอะไรละเนี่ย พอสงสัยก็เลยเริ่มเซิสค่ะ แต่พอเซิสกลับพบว่ามันมีรูปแบบการเขียน switch case ใหม่ๆโผล่มาอีกมากมาย และจุดเปลี่ยนล่าสุดแห่งวงการ switch case ก็เป็น feature ที่เปิดกว้างให้ concept ของ switch case มีความเหมาะสมกับการใช้งานหลากหลายมากขึ้น ซึ่งมาพร้อมกับ C# version 8.0 ที่เพิ่งจุดระเบิดเปิดตัวไปเมื่อไม่นานนี้เอง</p>
+<h2 id="From-Statement-to-Expression"><a href="#From-Statement-to-Expression" class="headerlink" title="From Statement to Expression"></a>From Statement to Expression</h2><p>ใน C# version ใหม่ จริงๆมีหลาย feature แต่ที่อยากพูดถึงก่อนก็คือ switch case</p>
+<p>อยากที่เกริ่นไว้ ปกติเราใช้ switch case คู่กับ break มาจนเป็นธรรมชาติ แล้วถ้าไปอ่าน <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/switch">doc</a> ของมันก็จะพบแมสเสจบางอย่างที่ก่อให้เกิดความสงสัย (คนอื่นอาจรู้อยู่แล้ว 555)</p>
+<blockquote>
+<p>switch is a selection statement…</p>
+</blockquote>
+<blockquote>
+<p>The switch statement is often used as an alternative to an if-else construct…</p>
+</blockquote>
+<p>ขีดเส้นใต้ตรง statement</p>
+<p>พอลองเซิสต่อไป ก็ย้อนกลับไปถึงคำนิยามของ <strong>Statement ใน C# ว่ามันคือ กลุ่มก้อนของ keywords (codes) ที่ก่อให้เกิด action อาจจะมีหรือไม่มี expressions และ operators ก็ได้</strong></p>
+<p><strong>และ expression เป็นซับเซตของ statement แต่เป็น action ที่มีการคำนวณ หรือทำอะไรบางอย่างให้เกิด value และมีการเก็บลงในตัวแปร</strong></p>
+<p>ถ้างง ดูตัวอย่าง code ดีกว่า</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cats; <span class="comment">//statement (declaration statement)</span></span><br><span class="line">cats = <span class="number">2</span>; <span class="comment">//ก็ยัง statement</span></span><br><span class="line">cats++; <span class="comment">//เนี่ย EXPRESSION statement มีการ + แล้วเก็บลง cats</span></span><br></pre></td></tr></table></figure>
+
+<p>และ switch case ดั้งเดิม เกิดมาพร้อมคำนิยามว่าเป็น <strong>statement</strong> นั่นหมายความว่าเราสามารถใช้ switch case เพื่อส่ง value บางอย่างกลับ (return) หรือแค่ให้เข้ามาทำงานบางอย่างแล้วผ่านไปโดยไม่ส่ง value อะไรกลับก็ได้เช่นกัน (break)</p>
+<h2 id="แต่พอมาถึง-C-8-0-ในรายการ-feature-ใหม่มีสิ่งที่เรียกว่า-switch-expression"><a href="#แต่พอมาถึง-C-8-0-ในรายการ-feature-ใหม่มีสิ่งที่เรียกว่า-switch-expression" class="headerlink" title="แต่พอมาถึง C# 8.0 ในรายการ feature ใหม่มีสิ่งที่เรียกว่า switch expression"></a>แต่พอมาถึง C# 8.0 ในรายการ feature ใหม่มีสิ่งที่เรียกว่า <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression">switch expression</a></h2><p>ของเดิมก็ทำได้อยู่แล้ว ดังนั้นคราวนี้จึงเป็นการปรับ syntax ใหม่เพื่อให้เราเห็นความแตกต่างระหว่าง case ได้ง่ายขึ้น</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> statusDisplay;</span><br><span class="line"><span class="keyword">switch</span> (projectStatusId)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">int</span>)ProjectStatus.Active:</span><br><span class="line">        statusDisplay = <span class="string">&quot;Working&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">int</span>)ProjectStatus.Finished:</span><br><span class="line">        statusDisplay = <span class="string">&quot;Finish&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">int</span>)ProjectStatus.Terminated:</span><br><span class="line">        statusDisplay = <span class="string">&quot;Terminated&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> (<span class="keyword">int</span>)ProjectStatus.Pending:</span><br><span class="line">        statusDisplay = <span class="string">&quot;Pending&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        statusDisplay = <span class="string">&quot;Not supported status id&quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> statusDisplay;</span><br></pre></td></tr></table></figure>
+
+<p>สามารถเปลี่ยนใหม่ให้สั้นลงได้เป็นแบบนี้</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">projectStatusId <span class="keyword">switch</span> &#123;</span><br><span class="line">    ProjectStatus.Active     =&gt; <span class="keyword">return</span> <span class="string">&quot;Working&quot;</span>,</span><br><span class="line">    ProjectStatus.Finished   =&gt; <span class="keyword">return</span> <span class="string">&quot;Finished&quot;</span>,</span><br><span class="line">    ProjectStatus.Terminated =&gt; <span class="keyword">return</span> <span class="string">&quot;Terminated&quot;</span>,</span><br><span class="line">    ProjectStatus.Pending    =&gt; <span class="keyword">return</span> <span class="string">&quot;Pending&quot;</span>,</span><br><span class="line">    _ =&gt; <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(message: <span class="string">&quot;Not supported status id&quot;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>การเอา case : ออกไปแล้วใช้ =&gt; แทน</li>
+<li>การเอา default ออก เหลือแค่ _</li>
+<li>การสลับ match มาวางหน้า switch</li>
+</ol>
+<p>ทั้งหมดทั้งมวลมันทำให้เกิดการจัดวางบรรทัดแบบใหม่ที่ส่งผลให้เราอ่าน code และเห็นผลลัพท์ที่จะได้จาก case ต่างๆง่ายขึ้นมาก สมแล้วที่ทาง C# 8.0 เคลมว่าเป็น feature ที่เพิ่มเติมความพิเศษให้ switch case พร้อมเป็น Expression statement อย่างสมศักดิ์ศรี</p>
+<p>นอกจากนี้ก็ยังมีวิธีการเขียน switch case เพิ่มเติมใน version นี้อีกหลายรูปแบบ แนะนำให้เข้าไปลองอ่าน document ต้นทางกันดู<em>แล้วจะรู้ว่า switch case เป็นได้มากกว่าที่คุณคิด</em> <span class="github-emoji" alias="wink" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8">&#x1f609;</span></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/" data-id="ckduil4of00022nxm999b7v3x" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/" data-id="ckduitm7t00025ejld1w0e8ol" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li></ul>
@@ -206,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/" data-id="ckduil4oi00052nxm3jaa0lhu" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/" data-id="ckduitm7w00055ejlgpi64jjr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
@@ -293,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/09/jira-automation/" data-id="ckduil4og00032nxmh9yyd4fh" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/09/jira-automation/" data-id="ckduitm7t00035ejl4j8lhcsf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a></li></ul>
@@ -416,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/07/living-document/" data-id="ckduil4oj00062nxmfw6o2iv1" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/07/living-document/" data-id="ckduitm7w00065ejl47pwaw4w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swagger/" rel="tag">swagger</a></li></ul>
@@ -475,7 +501,7 @@
 <li>push code ของเราขึ้นไปวางบน branch master ก่อนค่ะ มันจำเป็นต้องมี branch master เป็น branch แรก</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;new_repo</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
+<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;</a>:username/new_repo เอาแทนนะ</p>
 <h3 id="CI-CD-to-automatically-deploy-site-when-changes"><a href="#CI-CD-to-automatically-deploy-site-when-changes" class="headerlink" title="CI/CD to automatically deploy site when changes"></a>CI/CD to automatically deploy site when changes</h3><p>ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ </p>
 <p>ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ</p>
 <ol>
@@ -509,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckduil4oq000v2nxmcpgo9dz9" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckduitm7x00075ejl02pr7ndt" class="article-share-link">Share</a>
       
       
     </footer>
