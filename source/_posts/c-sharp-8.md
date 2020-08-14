@@ -1,7 +1,9 @@
 ---
 title: C# 8.0 - switch case From Statement to Expression
 tags: C#
+date: 2020-08-15 00:35:51
 ---
+
 
 ![c# and switch case expression](c-sharp-8/csharp-8.png)
 
