@@ -5,16 +5,23 @@
   
 
   
-  <title>Tag: Performance test | Saintsitive - life journal;</title>
+  <title>C# 8.0 - switch case From Statement to Expression | Saintsitive - life journal;</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Saintsitive - life journal;">
-<meta property="og:url" content="https://saintsitive-dev.github.io/tags/Performance-test/index.html">
+  <meta name="description" content="เรื่องมันเริ่มมาจาก เมื่อคืนลง extension ใน visual studio code แล้วพบว่า warning งอกทั่วทุกหัวระแหงก่อนจะค่อยๆ rebuild แล้วกลับเป็นปกติยกเว้นบางไฟล์ที่ยังแดงเถือกไม่หาย และ 1 ในนั้นก็พาให้เราไปเจอกับ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 8.0 - switch case From Statement to Expression">
+<meta property="og:url" content="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/index.html">
 <meta property="og:site_name" content="Saintsitive - life journal;">
+<meta property="og:description" content="เรื่องมันเริ่มมาจาก เมื่อคืนลง extension ใน visual studio code แล้วพบว่า warning งอกทั่วทุกหัวระแหงก่อนจะค่อยๆ rebuild แล้วกลับเป็นปกติยกเว้นบางไฟล์ที่ยังแดงเถือกไม่หาย และ 1 ในนั้นก็พาให้เราไปเจอกับ">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/csharp-8.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/unreachable-break.png">
+<meta property="article:published_time" content="2020-08-15T00:35:51.000Z">
+<meta property="article:modified_time" content="2020-08-14T17:37:23.564Z">
 <meta property="article:author" content="Sirirat Rungpetcharat">
-<meta property="article:tag" content="developer">
+<meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/csharp-8.png">
   
     <link rel="alternate" href="/atom.xml" title="Saintsitive - life journal;" type="application/atom+xml">
   
@@ -63,40 +70,62 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/08/12/jmeter-1/" class="archive-article-date">
-  <time datetime="2020-08-12T20:00:01.000Z" itemprop="datePublished">Aug 12</time>
+        <section id="main"><article id="post-c-sharp-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/15/c-sharp-8/" class="article-date">
+  <time datetime="2020-08-15T00:35:51.000Z" itemprop="datePublished">2020-08-15</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/12/jmeter-1/">JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย</a>
+    <h1 class="article-title" itemprop="name">
+      C# 8.0 - switch case From Statement to Expression
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/08/15/c-sharp-8/csharp-8.png" alt="c# and switch case expression"></p>
+<p>เรื่องมันเริ่มมาจาก เมื่อคืนลง extension ใน visual studio code แล้วพบว่า warning งอกทั่วทุกหัวระแหงก่อนจะค่อยๆ rebuild แล้วกลับเป็นปกติยกเว้นบางไฟล์ที่ยังแดงเถือกไม่หาย และ 1 ในนั้นก็พาให้เราไปเจอกับ code ชุดนึงเข้า</p>
+<p><img src="/2020/08/15/c-sharp-8/unreachable-break.png" alt="unreachable code"></p>
+<h2 id="มีคนวาง-break-ไว้หลัง-return"><a href="#มีคนวาง-break-ไว้หลัง-return" class="headerlink" title="มีคนวาง break ไว้หลัง return"></a>มีคนวาง break ไว้หลัง return</h2><p>ใจดำอำมหิตอะไรเยี่ยงนี้ 5555 break จะไม่มีวันได้เห็นเดือนเห็นตะวัน ไม่มีวันได้สัมผัสการ debug ใดใด เพราะ cursor ทั้งหลายจะโดน return ดีดออกจาก method ไปจนหมด</p>
+<h3 id="แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน"><a href="#แต่ก่อนจะใจบุญลบ-code-ออกไป-สมองดันสงสัยซะก่อน" class="headerlink" title="แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน"></a>แต่ก่อนจะใจบุญลบ code ออกไป สมองดันสงสัยซะก่อน</h3><p>แต่ switch case มันใช้กับ break และ default นี่หว่า 4 สหายที่ใช้กันมาแต่โบราณกาล แล้วถ้าไม่มี break ทิ้งไว้แค่ return มันจะได้เหรอ มันทำงานคนละอย่างกันเลยนะ…</p>
+<p><em>(สาระ - break จะดีดเราออกจาก switch case แล้วไปต่อบรรทัดล่างของ method นี้ ในขณะที่ return จะดีดเราออกจาก method ไปเลย)</em></p>
+<p>งั้น use case ที่ใช้ switch case + return นี่มันใช้กับอะไรละเนี่ย พอสงสัยก็เลยเริ่มเซิสค่ะ แต่พอเซิสกลับพบว่ามันมีรูปแบบการเขียน switch case ใหม่ๆโผล่มาอีกมากมาย และจุดเปลี่ยนล่าสุดแห่งวงการ switch case ก็เป็น feature ที่ปรับ concept ของ switch case ที่มาพร้อมกับ C# version 8.0 ที่เพิ่งจุดระเบิดเปิดตัวไปเมื่อไม่นานนี้เอง</p>
+<p>From Statement to Expression</p>
+<p>switch case new style</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/" data-id="ckduil4of00022nxm999b7v3x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/12/jmeter-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
