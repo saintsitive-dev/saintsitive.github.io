@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ | Saintsitive - life journal;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="กลับมาตามคำสัญญา ภาค 2 ของ JMeter: Performance Testing Tool ตามแผนเราตั้งใจจะรุมยำ server ว่าจะไหวไปสักกี่น้ำ แต่ก่อนจะกระหนำยิง เราต้องมีรูปแบบการใช้งานที่สมจริงเป็นต้นแบบซะก่อน ซึ่ง JMeter เองมีตัวช">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ">
+<meta property="og:url" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/index.html">
+<meta property="og:site_name" content="Saintsitive - life journal;">
+<meta property="og:description" content="กลับมาตามคำสัญญา ภาค 2 ของ JMeter: Performance Testing Tool ตามแผนเราตั้งใจจะรุมยำ server ว่าจะไหวไปสักกี่น้ำ แต่ก่อนจะกระหนำยิง เราต้องมีรูปแบบการใช้งานที่สมจริงเป็นต้นแบบซะก่อน ซึ่ง JMeter เองมีตัวช">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-google.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-recording-testplan.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-recording-flow.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-testscript-recorder.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-recording-howitworks.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-cert.png">
+<meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/google-search-request.png">
+<meta property="article:published_time" content="2020-08-16T00:02:27.000Z">
+<meta property="article:modified_time" content="2020-08-15T17:03:46.485Z">
+<meta property="article:author" content="Sirirat Rungpetcharat">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JMeter">
+<meta property="article:tag" content="Stress test">
+<meta property="article:tag" content="Load test">
+<meta property="article:tag" content="Performance test">
+<meta property="article:tag" content="testing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/jmeter-google.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Saintsitive - life journal;" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Saintsitive - life journal;</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://saintsitive-dev.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jmeter-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/16/jmeter-2/" class="article-date">
+  <time datetime="2020-08-16T00:02:27.000Z" itemprop="datePublished">2020-08-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>กลับมาตามคำสัญญา ภาค 2 ของ JMeter: Performance Testing Tool ตามแผนเราตั้งใจจะรุมยำ server ว่าจะไหวไปสักกี่น้ำ แต่ก่อนจะกระหนำยิง เราต้องมีรูปแบบการใช้งานที่สมจริงเป็นต้นแบบซะก่อน ซึ่ง JMeter เองมีตัวช่วยให้เราสร้าง test plan อย่างว่องไวได้ด้วยการบันทึกรูปแบบการท่องเว็บด้วย Recording Template</p>
+<h2 id="JMeter-Series"><a href="#JMeter-Series" class="headerlink" title="JMeter Series:"></a>JMeter Series:</h2><ol>
+<li><a href="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/">Intro to JMeter ทำไมใครๆบอกว่าง่าย</a></li>
+<li>Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ</li>
+<li>Work in Progress..</li>
+</ol>
+<h2 id="เนื้อหาในบทความ"><a href="#เนื้อหาในบทความ" class="headerlink" title="เนื้อหาในบทความ"></a>เนื้อหาในบทความ</h2><ol>
+<li><a href="#recordingtemplate">สร้าง Recording Template</a></li>
+<li><a href="#recoding">เริ่มต้นบันทึกรูปแบบการท่องเว็บ</a><ol>
+<li>ตั้งค่า Browser ให้ส่ง HTTP protocol ผ่าน Proxy Server</li>
+<li>ตั้งค่า SSL Certificate</li>
+</ol>
+</li>
+<li><a href="#validate">ตรวจสอบ และบันทึก testplan.jmx</a></li>
+</ol>
+<p><em>การทดลองมีความเสี่ยง ผู้ทดลองโปรดใช้วิจารณญาณในการรับชม</em></p>
+<hr>
+<h2 id="สร้าง-Recording-Template"><a href="#สร้าง-Recording-Template" class="headerlink" title="สร้าง Recording Template"></a><a name="recordingtemplate">สร้าง Recording Template</a></h2><p>ก่อนจะรันเทสบนเว็บเป้าหมาย เราต้องมี test plan กันก่อนเพราะฉะนั้นเปิด JMeter GUI ขึ้นมา</p>
+<p><strong>เลือก Files &gt; Templates… &gt; Recording</strong></p>
+<p><img src="/2020/08/16/jmeter-2/jmeter-google.png" alt="jmeter-recording-template"></p>
+<p>มันมี 2 เหตุผลที่เลือก Google เป็นเป้าหมายในวันนี้ </p>
+<ol>
+<li>ขอสารภาพว่าป็อด 5555 ไม่กล้าเอาเว็บบริษัทมาเป็นตัวอย่างจริงๆค่ะ คือมัน scale out ได้แหละ แต่ก็อย่าเลย เราเล่นกับ google นี่แหละ</li>
+<li>google.com เป็นบรรทัดฐานที่ดีค่ะ ผลลัพท์ที่ได้จากการยิงเว็บที่รับมือคนได้ทั้งโลกระดับนี้ จะเป็น benchmark ที่ดีเวลาเอามาเทียบกับเว็บของเรา</li>
+</ol>
+<p>หลังกด Create สิ่งที่ได้มาจะเป็นดังรูปข้างล่าง</p>
+<p><img src="/2020/08/16/jmeter-2/jmeter-recording-testplan.png" alt="jmeter-recording-testplan"></p>
+<p><a href="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/">บล็อคที่แล้ว</a>อธิบายอย่างนึง ทำไมมาทำจริง test plan เปลี่ยนเป็นอีกแบบนึง 5555 ใจเย็นๆนะทุกคน มันยัง concept เดิมแหละ ใน<strong>กรอบสีเขียว</strong> Thread Group &gt; Elements(Recording Controller) &gt; Listener(View Results Tree)</p>
+<p>แล้วข้างบนอีก 2 ก้อนสีที่งอกมามันคืออะไรกันละ!!</p>
+<p>มาว่ากันที่<strong>กรอบสีแดง</strong>ก่อน User Defined Variables, HTTP request Defaults, HTTP Cookie Manager ทั้ง 3 อันนี้เป็น Config elements มีมาเพื่อประกาศตัวแปร/ตั้งค่าทั่วไปให้ test plan หรือกำหนดค่า default สำหรับใช้ใน test plan หนึ่งๆค่ะ เช่น เราสามารถเอาค่า host ใน User Defined Variables ไปใช้ในจุดอื่นๆของ test plan ได้ในลักษณะนี้</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;host&#125;</span><br></pre></td></tr></table></figure>
+<p>ช่องนั้นก็จะถูกแทนค่าด้วย <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a> ทันทีที่ runtime ซึ่งไม่ค่อยมีประโยคกับการรันเทสก็อกๆแก๊กๆของเราเท่าไหร่ค่ะ แต่มีคุณประโยชน์มหาศาลหากเราจะเอาไปใช้ใน Production และแน่นอนว่า มีอีกหลาย Config elements ให้เราใช้งาน แล้วแต่ use case ที่ต้องการเทส</p>
+<p><strong>กรอบสีฟ้า</strong> ถ้ายังจำได้จากบล็อคที่แล้วมีการพูดถึงคอนเซป workbench (ที่ไม่มีอีกต่อไปแล้วในเวอร์ชั่น 5.3) มันคือการทำงานที่อยู่นอก test plan นึกภาพ flow ของสิ่งที่เรากำลังจะทำในตอนนี้คือการทดสอบยิงเว็บของเราแบบมีลำดับ action โดยทั่วไป Test plan ต้องการข้อมูลแค่ <strong>ยิงไปไหน ปริมาณเท่าไหร่ ลำดับเป็นยังไง</strong> การได้มาซึ่งข้อมูลเหล่านั้นคือการนั่งสร้าง test plan elements มาประกอบทีละอันๆ</p>
+<p>แต่ไม่ ครั้งนี้สิ่งที่เราจะทำคือการวานให้ JMeter บันทึกรูปแบบการเดินทางท่องเว็บของเราให้หน่อย แล้วเราจะเอาลำดับที่ได้นั้นไปเป็น elements ต่างๆของ test plan อีกที</p>
+<p>เพราะฉะนั้น เรื่องราวของการตั้งค่าเพื่อบันทึกการเดินทางครั้งนี้ จึงไม่ถือเป็นส่วนหนึ่งของ test plan และจะไม่ถูกเรียกใช้เมื่อเราสั่งรันเทสค่ะ ถ้างง ดูรูปประกอบค่ะ</p>
+<p><img src="/2020/08/16/jmeter-2/jmeter-recording-flow.png" alt="jmeter-recording-flow"></p>
+<h3 id="เพราะทุกครั้งที่รันเทส-เราไม่จำเป็นต้องบันทึก-behavior-ใหม่-แค่รันตาม-behavior-pattern-เดิมที่เรามี-100-รอบ-1000-รอบก็พอ"><a href="#เพราะทุกครั้งที่รันเทส-เราไม่จำเป็นต้องบันทึก-behavior-ใหม่-แค่รันตาม-behavior-pattern-เดิมที่เรามี-100-รอบ-1000-รอบก็พอ" class="headerlink" title="เพราะทุกครั้งที่รันเทส เราไม่จำเป็นต้องบันทึก behavior ใหม่ แค่รันตาม behavior pattern เดิมที่เรามี 100 รอบ 1000 รอบก็พอ"></a>เพราะทุกครั้งที่รันเทส เราไม่จำเป็นต้องบันทึก behavior ใหม่ แค่รันตาม behavior pattern เดิมที่เรามี 100 รอบ 1000 รอบก็พอ</h3><hr>
+<h2 id="เริ่มต้นบันทึกรูปแบบการท่องเว็บ"><a href="#เริ่มต้นบันทึกรูปแบบการท่องเว็บ" class="headerlink" title="เริ่มต้นบันทึกรูปแบบการท่องเว็บ"></a><a name="recording">เริ่มต้นบันทึกรูปแบบการท่องเว็บ</a></h2><p><strong>เลือก HTTP(S) Test Script Recorder</strong></p>
+<p><img src="/2020/08/16/jmeter-2/jmeter-testscript-recorder.png" alt="jmeter-test script recorder"></p>
+<p>จะเห็นปุ่ม Start ถ้าใจร้อนกด Start แล้วไปเปิด browser เล่นเว็บเป้าหมาย แล้วหวังว่า JMeter จะ record ให้เลยก็จะผิดหวังค่ะ 5555 (เราทำมาแล้ว บอกแล้วเป็นสายลองก่อน ไม่ได้ค่อยถอยกลับมาอ่าน)</p>
+<p>มันมี 2 อย่างที่เราต้อง setting เพิ่มเติมเพื่อให้ JMeter ทำงานได้</p>
+<ol>
+<li>ตั้งค่าให้ browser ส่ง HTTP package ผ่าน Proxy Server</li>
+<li>ตั้งค่า Certificate ให้เว็บปลายทาง handshake กับ browser ของเราที่ถูกดักผ่าน proxy server แล้วยังผ่าน (เพราะเราคุยกันกับเว็บปลายทางด้วย HTTPS protocols)</li>
+</ol>
+<p><img src="/2020/08/16/jmeter-2/jmeter-recording-howitworks.png" alt="jmeter-recording-how it works"></p>
+<p>เพราะเราต้องการบันทึก pattern ของการยิง http request เอาไว้ลูปใส่ server เป้าหมายในภายหลัง จึงต้องทำให้ JMeter อ่าน http package ที่เดินทางเข้าและออกจาก browser ที่เราเปิดเว็บเป้าหมายได้ ถ้าใครเคยเล่น wireshark จะเข้าใจว่ามันคือหลักการเดียวกันค่ะ</p>
+<p><em>และปุ่ม Start ที่เห็นใน Configuration ของ HTTP(S) Test Script Recorder นั้น คือการสั่งเปิด proxy server เพื่อดักจับ package ค่ะ</em></p>
+<p>และนอกจากนี้จะส่วนให้ config เพิ่มเติมอีก 2 ส่วน </p>
+<p><strong>Test Plan Creation</strong> ตรงนี้คือตัวกำหนดว่าจะเราจะบันทึก pattern ที่ได้ไปไว้ที่ไหนของ test plan, จะแบ่งกรุ๊ปของ Sampler (transactions) ด้วยอะไร</p>
+<p><strong>Requests Filtering</strong> ระหว่างที่เราทำการบันทึกมันอาจมี package อื่นปลอมปนเข้ามา เช่น chrome ของเราเอง มีการ login ค้างเอาไว้ดังนั้นจะมี package ที่ยิงไป googleapis อยู่เสมอ เราสามารถกรองของแบบนี้ออกได้</p>
+<h3 id="1-Setting-browser-amp-Proxy-server"><a href="#1-Setting-browser-amp-Proxy-server" class="headerlink" title="1. Setting browser &amp; Proxy server"></a>1. Setting browser &amp; Proxy server</h3><p><em>browser ที่เลือกมาเป็น Chrome ค่ะ</em></p>
+<p><strong>เลือก Settings &gt; Advanced &gt; System &gt; Open your computer’s proxy settings</strong></p>
+<p><strong>เลือก Use a proxy server</strong></p>
+<p><strong>ใส่ Address เป็น <a target="_blank" rel="noopener" href="http://localhost/">http://localhost</a></strong></p>
+<p><strong>ใส่ Port เป็น 8888 (ตรงกับ port ใน HTTP(S) Test Script Recorder)</strong></p>
+<p>Save ปั๊บ เน็ตหลุดปุ๊บค่ะ 555 เพราะเรายังไม่ได้ start proxy server เลย</p>
+<h3 id="2-ตั้งค่า-Certificate"><a href="#2-ตั้งค่า-Certificate" class="headerlink" title="2. ตั้งค่า Certificate"></a>2. ตั้งค่า Certificate</h3><p><strong>กด start ใน HTTP(S) Test Script Recorder จะเจอ popup หน้าตาแบบนี้</strong></p>
+<p><img src="/2020/08/16/jmeter-2/jmeter-cert.png" alt="jmeter-certificate"></p>
+<p>ทันทีที่กด start เราจะได้ CA certificate มา 1 อัน อยู่ใน folder bin เราต้องเอาสิ่งนี้ไป import ให้ browser เราอีกทีค่ะ</p>
+<p><strong>เลือก Settings &gt; Privacy and security &gt; Security &gt; Manage certificates</strong></p>
+<p><strong>เลือก tab Trusted Root Certificate Authorities &gt; Import &gt; เลือกไฟล์ ApacheJMeterTemporaryRootCA.crt</strong></p>
+<p><strong>Restart Chrome</strong></p>
+<p>cert ตัวนี้มีอายุเพียง 7 วัน และเมื่อหมดอายุต้องเอาออกก่อนจะใส่ตัวใหม่ลงไปเสมอ ไม่งั้น browser เบลอ</p>
+<p>เพียงเท่านี้เราก็พร้อมแล้วที่จะ record การเล่นเว็บของเรา</p>
+<h3 id="3-Start-Proxy-Server-และเริ่มท่องหน้าเว็บเป้าหมายจนกว่าจะพอใจ"><a href="#3-Start-Proxy-Server-และเริ่มท่องหน้าเว็บเป้าหมายจนกว่าจะพอใจ" class="headerlink" title="3. Start Proxy Server และเริ่มท่องหน้าเว็บเป้าหมายจนกว่าจะพอใจ"></a>3. Start Proxy Server และเริ่มท่องหน้าเว็บเป้าหมายจนกว่าจะพอใจ</h3><p>ในขั้นตอนนี้ เราทำ 2 อย่างค่ะ</p>
+<ol>
+<li>เข้าหน้า <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a></li>
+<li>พิมพ์ jmeter ในกล่อง search แล้วค้นหา</li>
+</ol>
+<h3 id="4-Stop"><a href="#4-Stop" class="headerlink" title="4. Stop"></a>4. Stop</h3><p>สิ่งที่ได้ออกมามี 2 ส่วนนะคะ</p>
+<h3 id="ส่วนที่-1"><a href="#ส่วนที่-1" class="headerlink" title="ส่วนที่ 1"></a>ส่วนที่ 1</h3><p>HTTP request ทั้งหมดที่ record ไว้ระหว่างเปิด proxy server จะถูกบันทึก pattern ไว้ใน <strong>Thread Group &gt; Recording Controller</strong> ภายใต้ recording controller จะมี transaction controller นี่คือการพยายามจัดกรุ๊ปของ http request transaction </p>
+<p><img src="/2020/08/16/jmeter-2/google-search-request.png" alt="jmeter-google search pattern"></p>
+<p>สีฟ้าอันแรก - GET request <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a><br>สีฟ้าแผงที่สองและสาม - GET request ตอนที่พิมพ์ jmeter แบบรายตัว<br>สีแดง - GET request ผลลัพท์การเซิส jmeter</p>
+<p>ส่วน transaction ล่างที่ไม่ได้กล่าวถึงอันนั้นเป็นส่วนที่เรา login google account ไว้และไม่เกี่ยวกับการทดสอบของเราวันนี้</p>
+<h3 id="ส่วนที่-2"><a href="#ส่วนที่-2" class="headerlink" title="ส่วนที่ 2"></a>ส่วนที่ 2</h3><p>google-recording.xml ไฟล์นี้คือผลลัพท์ของการรันรอบนี้ สามารถดูได้ที่ <strong>HTTP(S) Test Script Recorder &gt; View Results Tree &gt; Write result to file / Read from file</strong></p>
+<p>อันนี้เป็นตัวอย่างผลจากการรันทดสอบภายใต้ Thread Group 1 concurrent/1 loop เท่านั้น ขนาดไฟล์ก็ปาไป 1 Mb คือเก็บละเอียดมากค่ะ ลองเปิดดูได้</p>
+<p>ซึ่งเวลาเอาไปรันจริง แนะนำว่าให้บันทึกไฟล์ลงในไดร์ฟที่ว่างนะคะ เพราะเราต้องใช้ไฟล์นี้แหละในการ generate ผลลัพท์รูปแบบต่างๆ</p>
+<p>และด้วยความที่บันทึกละเอียดขนาดนี้ จึงไม่แนะนำให้ใช้ View Results แบบใดใดเลยระหว่างที่ทำการรันเทส</p>
+<p>และยิ่งแผนเราจะยิง 1000 concurrent ไม่ควรอย่างยิ่งที่จะใช้ GUI เพราะถ้าเรา process response ที่ server ตอบกลับมาไม่ทัน write file ได้ช้า จะทำให้ผลการวัด performance คลาดเคลื่อนไปเลยด้วยค่ะ</p>
+<hr>
+<h2 id="ตรวจสอบ-และบันทึก-testplan-jmx"><a href="#ตรวจสอบ-และบันทึก-testplan-jmx" class="headerlink" title="ตรวจสอบ และบันทึก testplan.jmx"></a><a name="validate">ตรวจสอบ และบันทึก testplan.jmx</a></h2><p><strong>คลิกขวาที่ Thread Group &gt; Validate</strong> เพื่อตรวจสอบดูว่ามีข้อมูลส่วนไหนที่เวลาเอาไปรันแล้วจะไม่ได้ผลเหมือนที่ทำการบันทึกไว้รึเปล่า บอกเลยว่า ถ้าถึงเวลาไปรันบนเว็บจริงของเราที่มีระบบ authentication จะมีประเด็นค่ะ เพราะ Recording จับไว้ และเอามาใช้ต่อได้เฉพาะ token ที่เห็นติดมากับ package เท่านั้น เพราะฉะนั้นแนะนำให้ login ใหม่ไปเลยระหว่าง record นะคะในคราวนี้</p>
+<p>หลังจากนั้นค่อย implement User Defined Variables, Pre/Post Processors เพื่อกระทำการขอ token แทนการ login ในอนาคตค่ะ</p>
+<p>แต่สำหรับ google search ครั้งนี้คือผ่านค่ะ save ได้</p>
+<p><strong>เลือก Test plan &gt; Files &gt; Save</strong></p>
+<p>จากนั้นไปนอนค่ะ 5555555555</p>
+<hr>
+<p>ยังเหลืออีก 1 ตอนนะคะ สำหรับซีรี่ย์ JMeter จากเดิมกะว่า 2 ตอนจบ ไม่ได้จริงๆค่ะ รายละเอียดมันเยอะเกินไป ไม่เพียงแค่คนอ่านจะย่อยไม่ไหว เราเองก็ขยายให้ฟังได้ไม่หมด</p>
+<p>นี่ยังไม่ได้พูดถึงการใช้ Pre processors / Post processors / Timer / Assertion และอีกล้านแปดที่ยังมีอีกเพียบใน JMeter ซึ่งเราเองก็ยังอ่านไปไม่ถึงไหนค่ะตอนนี้</p>
+<p>พอดีมีเป้าหมายว่าต้องเทส Performance เว็บตัวเองให้ได้ เลยเอาแค่เท่าที่ต้องการก่อน ซึ่งตอนนี้ก็ได้ผลนั้นออกมาแล้ว ไว้จะเอา result มาเทียบกับผล google คราวนี้ในบล็อคหน้านะคะ</p>
+<h2 id="มันก็จะเขินๆกับผลลัพท์นิดนึง-55555"><a href="#มันก็จะเขินๆกับผลลัพท์นิดนึง-55555" class="headerlink" title="มันก็จะเขินๆกับผลลัพท์นิดนึง 55555"></a>มันก็จะเขินๆกับผลลัพท์นิดนึง 55555</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/" data-id="ckdvwtqn9000v2vwlf721fnfx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/15/c-sharp-8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C# 8.0 - switch case From Statement to Expression</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/" rel="tag">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testing/" rel="tag">testing</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/JIRA/" style="font-size: 10px;">JIRA</a> <a href="/tags/JMeter/" style="font-size: 20px;">JMeter</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Load-test/" style="font-size: 20px;">Load test</a> <a href="/tags/Performance-test/" style="font-size: 20px;">Performance test</a> <a href="/tags/Redoc/" style="font-size: 10px;">Redoc</a> <a href="/tags/Stress-test/" style="font-size: 20px;">Stress test</a> <a href="/tags/XML/" style="font-size: 10px;">XML</a> <a href="/tags/conceptual/" style="font-size: 10px;">conceptual</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/testing/" style="font-size: 20px;">testing</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/16/jmeter-2/">JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/15/c-sharp-8/">C# 8.0 - switch case From Statement to Expression</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/12/jmeter-1/">JMeter Series - [1] Intro to JMeter ทำไมใครๆบอกว่าง่าย</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/09/jira-automation/">สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Sirirat Rungpetcharat<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
