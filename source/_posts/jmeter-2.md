@@ -1,13 +1,15 @@
 ---
-title: JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ
-tags: 
+title: 'JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ'
+tags:
   - Java
   - JMeter
   - Stress test
   - Load test
   - Performance test
   - testing
+date: 2020-08-16 00:02:27
 ---
+
 
 กลับมาตามคำสัญญา ภาค 2 ของ JMeter: Performance Testing Tool ตามแผนเราตั้งใจจะรุมยำ server ว่าจะไหวไปสักกี่น้ำ แต่ก่อนจะกระหนำยิง เราต้องมีรูปแบบการใช้งานที่สมจริงเป็นต้นแบบซะก่อน ซึ่ง JMeter เองมีตัวช่วยให้เราสร้าง test plan อย่างว่องไวได้ด้วยการบันทึกรูปแบบการท่องเว็บด้วย Recording Template
 
