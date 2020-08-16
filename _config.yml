@@ -100,14 +100,16 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: landscape
 
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: ''
-
-# Emoji
+## Emoji
 emoji:
   enable: true
   className: github-emoji
   styles:
   customEmojis:
+
+## fb Social Plugins
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: ''
