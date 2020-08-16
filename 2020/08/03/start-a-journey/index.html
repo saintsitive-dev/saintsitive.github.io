@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/new-personal-access-token.png">
 <meta property="og:image" content="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/github-pages.png">
 <meta property="article:published_time" content="2020-08-03T10:43:25.000Z">
-<meta property="article:modified_time" content="2020-08-15T17:08:08.392Z">
+<meta property="article:modified_time" content="2020-08-16T14:57:59.939Z">
 <meta property="article:author" content="Sirirat Rungpetcharat">
 <meta property="article:tag" content="developer">
 <meta name="twitter:card" content="summary">
@@ -39,6 +39,8 @@
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 <body>
+  <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v8.0&appId=632671150711959&autoLogAppEvents=1" nonce="ZQnSfi8l"></script>
   <div id="container">
     <div id="wrap">
       <header id="header">
@@ -119,7 +121,7 @@
 <li>push code ของเราขึ้นไปวางบน branch master ก่อนค่ะ มันจำเป็นต้องมี branch master เป็น branch แรก</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;new_repo</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
+<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#99;&#111;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
 <h3 id="CI-CD-to-automatically-deploy-site-when-changes"><a href="#CI-CD-to-automatically-deploy-site-when-changes" class="headerlink" title="CI/CD to automatically deploy site when changes"></a>CI/CD to automatically deploy site when changes</h3><p>ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ </p>
 <p>ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ</p>
 <ol>
@@ -153,12 +155,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckdvwzck30006zut72kvg92qc" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckdx7rtxh0006zpr8dpjp7hai" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
+    <div class="fb-comments" data-href="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-numposts="5" data-width="100%"></div>
     
 <nav id="article-nav">
   
