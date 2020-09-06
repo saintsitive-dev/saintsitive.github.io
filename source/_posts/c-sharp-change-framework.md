@@ -1,13 +1,15 @@
 ---
 title: เปลี่ยน netcoreapp2.2 เป็น netcoreapp3.1 บทเรียนที่ได้มาจากการฝ่าหลุมอากาศ!!
-tags: 
+tags:
   - C#
   - ASP.NET Core 2.2
   - ASP.NET Core 3.1
   - Framework
   - Migration
   - lesson learned
+date: 2020-09-06 19:45:30
 ---
+
 
 ## เนื้อหาในบทความ
 
