@@ -67,6 +67,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-c-sharp-change-framework" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/06/c-sharp-change-framework/" class="article-date">
+  <time datetime="2020-09-06T19:45:30.000Z" itemprop="datePublished">2020-09-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/06/c-sharp-change-framework/">เปลี่ยน netcoreapp2.2 เป็น netcoreapp3.1 บทเรียนที่ได้มาจากการฝ่าหลุมอากาศ!!</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="เนื้อหาในบทความ"><a href="#เนื้อหาในบทความ" class="headerlink" title="เนื้อหาในบทความ"></a>เนื้อหาในบทความ</h2><ol>
+<li><a href="#expiration-date">ตรวจสอบอายุขัยของ Technology เสมอ</a></li>
+<li><a href="#build-rebuild-clean">Build ≠ Rebuild ≠ Clean</a></li>
+<li><a href="#middleware-pipeline">จัดเรียง Middleware Pipeline ให้ดี</a></li>
+<li><a href="#cors-suspect">Middleware Pipeline จะ wrap error message ของเราไว้จนดูเหมือนทุกอย่างเป็น CORS policy บน Production environment</a></li>
+</ol>
+<hr>
+<h2 id="คนเราจะทำอะไรมันต้องมีแรงบันดาลใจ-ว่ามั้ย"><a href="#คนเราจะทำอะไรมันต้องมีแรงบันดาลใจ-ว่ามั้ย" class="headerlink" title="คนเราจะทำอะไรมันต้องมีแรงบันดาลใจ ว่ามั้ย?"></a>คนเราจะทำอะไรมันต้องมีแรงบันดาลใจ ว่ามั้ย?</h2><p>ถ้าถามว่าอะไรบันดาลใจให้ลุกขึ้นมาเปลี่ยน framework คำตอบที่ให้กับผู้บริหารด้วยกัน คือ </p>
+<blockquote>
+<p>“ได้เรื่องใช้ resource น้อยลง code อ่านง่ายขึ้น = เวลาเดฟก็สั้นลง และ performance ก็เร็วขึ้นนิดนึง แถมยังได้ LTS อีกด้วยค่ะ”</p>
+</blockquote>
+<p>แต่ความจริงในใจก็คือ </p>
+<blockquote>
+<p>อยากใช้ Syntax C# version 8</p>
+</blockquote>
+<p>55555555</p>
+<p><img src="/2020/09/06/c-sharp-change-framework/change-netcoreapp.png" alt="netcoreapp2.2 to 3.1"></p>
+<p>การเปลี่ยนครั้งนี้นำมาซึ่งความเข้าใจ การ refactor ให้รองรับ lib ใหม่ (รอยยิ้ม และน้ำตา) แต่ละบรรทัดของ commit นี่แทบจะเป็น blog ได้ 1 ตอน และได้ให้สัญญากับน้องๆในบริษัทเอาไว้ ว่าถ้าทำเสร็จแล้วจะเอามาถ่ายทอดให้ครบทุกความเจ็บปวด(?)กันไปเลย แต่แน่นอนว่า ไม่ใช่เนื้อหาของ blog นี้ เพราะแต่ละแอพก็คงมี lib ที่ใช้แตกต่างกัน เพราะฉะนั้น technical dept เป็นเรื่องราวของใครของมันนะคะ 5555</p>
+<h2 id="Technical-dept-เมื่อเกิดขึ้นแล้ว-ดอกเบี้ยแพงเสมอ-x1f631"><a href="#Technical-dept-เมื่อเกิดขึ้นแล้ว-ดอกเบี้ยแพงเสมอ-x1f631" class="headerlink" title="Technical dept เมื่อเกิดขึ้นแล้ว ดอกเบี้ยแพงเสมอ &#x1f631;"></a>Technical dept เมื่อเกิดขึ้นแล้ว ดอกเบี้ยแพงเสมอ <span class="github-emoji" alias="scream" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f631.png?v8">&#x1f631;</span></h2><p>และ blog นี้ขอนำเสนอการหลีกเลี่ยงหลุมอากาศที่อาจจะได้เจอเมื่อตัดสินใจเปลี่ยน ASP.NET framwork version ค่ะ รู้ไว้ แล้วจะไม่เสียเวลา <span class="github-emoji" alias="wink" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8">&#x1f609;</span></p>
+<h3 id="บทเรียนที่-0-ก่อนจะเริ่มลงมือ-migrate-ขอแนะนำว่าจงทำตาม-Official-Walkthrough-อย่างเคร่งครัด"><a href="#บทเรียนที่-0-ก่อนจะเริ่มลงมือ-migrate-ขอแนะนำว่าจงทำตาม-Official-Walkthrough-อย่างเคร่งครัด" class="headerlink" title="บทเรียนที่ 0 ก่อนจะเริ่มลงมือ migrate ขอแนะนำว่าจงทำตาม Official Walkthrough อย่างเคร่งครัด"></a><strong>บทเรียนที่ 0 ก่อนจะเริ่มลงมือ migrate ขอแนะนำว่าจงทำตาม <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.1&tabs=visual-studio">Official Walkthrough</a> อย่างเคร่งครัด</strong></h3><hr>
+<h2 id="หลุมที่-1-ตรวจสอบอายุขัยของ-Technology-เสมอ"><a href="#หลุมที่-1-ตรวจสอบอายุขัยของ-Technology-เสมอ" class="headerlink" title="หลุมที่ 1 ตรวจสอบอายุขัยของ Technology เสมอ"></a><a name="expiration-date">หลุมที่ 1 ตรวจสอบอายุขัยของ Technology เสมอ</a></h2><p>บังเอิญเวอร์ชั่นที่ใช้อยู่คือ ASP.NET Core 2.2 อยากเรียกว่าเป็นเวอร์ชั่นลูกเมียน้อย เพราะทุกวันนี้ ASP.NET Core 2.1 ยังซัพพอร์ตอยู่เลย เราที่รีบร้อนเลี้ยวตามเทคโนโลยีก็ โดนเทคโนโลยีพามาเจอทางตัน เพราะเค้าพากันไป 3.1 หมด (และในวันนี้ .NET 5 ก็มาจ่อคอหอยแล้วค่ะ 555555)</p>
+<p>สำหรับใครที่คิดจะเปลี่ยน asp.net framework อย่าลืมมาเช็คอายุขัยในนี้ก่อนนะ <a target="_blank" rel="noopener" href="https://dotnet.microsoft.com/download/dotnet-core">.net core support</a></p>
+<h2 id="เพราะทุกเทคโนโลยีมีวันหมดอายุ"><a href="#เพราะทุกเทคโนโลยีมีวันหมดอายุ" class="headerlink" title="เพราะทุกเทคโนโลยีมีวันหมดอายุ"></a>เพราะทุกเทคโนโลยีมีวันหมดอายุ</h2><p>ไม่มีใครรับ support อะไรไปได้ตลอดกาล ขนาด Microsoft ยังต้องประกาศไม่รับดูแล windows บางเวอร์ชั่นเมื่อเวลาผ่านไป คือคุณยังใช้ได้แหละ แต่มีปัญหาอะไรก็ต้องดูแลกันเอาเอง</p>
+<h3 id="บทเรียนที่-1-พาตัวเองไปอยู่ใน-LTS-Long-Term-Support-อยู่เสมอ"><a href="#บทเรียนที่-1-พาตัวเองไปอยู่ใน-LTS-Long-Term-Support-อยู่เสมอ" class="headerlink" title="บทเรียนที่ 1 พาตัวเองไปอยู่ใน LTS (Long Term Support) อยู่เสมอ"></a><strong>บทเรียนที่ 1 พาตัวเองไปอยู่ใน LTS (Long Term Support) อยู่เสมอ</strong></h3><hr>
+<h2 id="หลุมที่-2-Build-≠-Rebuild-≠-Clean"><a href="#หลุมที่-2-Build-≠-Rebuild-≠-Clean" class="headerlink" title="หลุมที่ 2 Build ≠ Rebuild ≠ Clean"></a><a name="build-rebuild-clean">หลุมที่ 2 Build ≠ Rebuild ≠ Clean</a></h2><p>เป้าหมายของการเปลี่ยน framework ครั้งนี้คือ API โปรเจค ก้าวแรกไม่ยากเลย มุ่งตรงไปเปลี่ยน TargetFramework จาก netcoreapp2.2 เป็น netcoreapp3.1 เปลี่ยนปั๊บ <strong>Run</strong> พังนิดหน่อย เปลี่ยน lib บางตัว อัพเวอร์ชั่นบางตัว ปรับ code ใน startup.cs <strong>Run</strong> อีกรอบ เฮ้ย ผ่านละ อะไรมันจะง่ายปานนั้น สบายใจโยนลง branch เตรียมเทส ไปนอน กะว่าพรุ่งนี้ตื่นมาได้เทสชัวร์</p>
+<h3 id="แต่เช้ามาพบกับความพัง"><a href="#แต่เช้ามาพบกับความพัง" class="headerlink" title="แต่เช้ามาพบกับความพัง"></a>แต่เช้ามาพบกับความพัง</h3><p>เฮ้ย ทำไมพังได้ <em>ก็ complier บอกเราว่าผ่านใสๆนี่นา</em> เล่นแง่อะไรกันอีกละเนี่ย หรือ IDE ก็มีวันเบลอๆเหมือนกัน?</p>
+<h2 id="แต่เทคโนโลยีไม่มีวันโกหก-อาจจะเป็นเราที่โกหกตัวเอง-555"><a href="#แต่เทคโนโลยีไม่มีวันโกหก-อาจจะเป็นเราที่โกหกตัวเอง-555" class="headerlink" title="แต่เทคโนโลยีไม่มีวันโกหก (อาจจะเป็นเราที่โกหกตัวเอง 555)"></a>แต่เทคโนโลยีไม่มีวันโกหก (อาจจะเป็นเราที่โกหกตัวเอง 555)</h2><p>ขยายความประโยคข้างบนนิดนึงกลัวทัวร์ลง คือทุกผลลัพท์ที่ผิดคาดของ machine มันมีสาเหตุเสมอค่ะ อยู่ที่เรารู้หรือไม่รู้เท่านั้นเอง (และอยู่ที่มันจะบอกเราหรือไม่ หรืออาจถูก wrap ไว้ใต้ error message อะไรบางอย่างเพื่อไม่ให้มักเกิ้ลอย่างเรางง)</p>
+<p>และสาเหตุที่ทำให้ทุกอย่างมันผ่านใสกิ๊งขนาดนี้ก็เป็นเพราะเราลืมไปว่าการกดปุ่ม run บน visual studio 2019 มันคือการ build และ run แบบใส่ debugging tool ลงไป ประเด็นมันอยู่ตรงที่ โดยปกติการ build ทำงานแบบที่ว่า ถ้า file ไหนมี code เปลี่ยนก็เอามา build ใหม่ ถ้าไม่ ก็ข้ามไป พูดไปอาจงง ดูรูปประกอบ</p>
+<p><img src="/2020/09/06/c-sharp-change-framework/build-rebuild-clean.png" alt="build-rebuild-clean"></p>
+<p>เพราะฉะนั้นการ run อย่างเดียวเลยทำให้โปรเจคอื่นๆที่ไม่ได้มี code เปลี่ยนยังคงใช้ configuration แบบเดิม และส่งผลให้เราไม่เห็นผลกระทบที่โปรเจคมีต่อกันเมื่อโปรเจคนึงมีการเปลี่ยนแปลง เนื่องจากการเปลี่ยน frameworks ของ C# โปรเจคที่ reference ต่อต้องเปลี่ยนตามหรืออย่างน้อยๆต้องใช้ framework ที่ compatible ดังนั้นการเปลี่ยน framework แค่โปรเจคเป้าหมาย โดยไม่ได้เปลี่ยนปลายทางด้วยเลยก่อให้เกิด error ตามมา</p>
+<h3 id="บทเรียนที่-2-เมื่อทำอะไรยิ่งใหญ่ให้-Clean-Solution-ก่อนเสมอ-ถ้า-frontend-ก็ลบ-node-module-555"><a href="#บทเรียนที่-2-เมื่อทำอะไรยิ่งใหญ่ให้-Clean-Solution-ก่อนเสมอ-ถ้า-frontend-ก็ลบ-node-module-555" class="headerlink" title="บทเรียนที่ 2 เมื่อทำอะไรยิ่งใหญ่ให้ Clean Solution ก่อนเสมอ (ถ้า frontend ก็ลบ node_module 555)"></a><strong>บทเรียนที่ 2 เมื่อทำอะไรยิ่งใหญ่ให้ Clean Solution ก่อนเสมอ (ถ้า frontend ก็ลบ node_module 555)</strong></h3><hr>
+<h2 id="หลุมที่-3-จัดเรียง-Middleware-Pipeline-ให้ดี"><a href="#หลุมที่-3-จัดเรียง-Middleware-Pipeline-ให้ดี" class="headerlink" title="หลุมที่ 3 จัดเรียง Middleware Pipeline ให้ดี"></a><a name="middleware-pipeline">หลุมที่ 3 จัดเรียง Middleware Pipeline ให้ดี</a></h2><p>สำหรับคนที่อยู่บน .net core มาแต่แรกอาจจะเข้าใจ concept การใช้ middleware pipeline เป็นตัวคัดกรอง HTTP Request ที่ไหลเข้ามา ซึ่งแต่ละชั้นของ pipeline มีหน้าที่ที่ตัวเอง focus เช่น HTTPsRedirection แปลงทุก request ให้เป็น HTTPS, Authentication จัดการเรื่อง Authentication (ใช้ JWT หรืออะไรก็ว่ากันไป) เป็นต้น</p>
+<p>และเมื่อ middleware ชั้นนั้นๆทำงานเสร็จก็จะส่ง request ให้ชั้นต่อๆไป แต่ถ้าไม่ผ่านก็ drop ได้เลยไม่เสียเวลา โดยปลายทาง API Controller ของเราจะอยู่ในชั้นในสุด Endpoint</p>
+<p><img src="/2020/09/06/c-sharp-change-framework/ASP-NET-Core-Middleware-Microsoft-Docs.png" alt="middleware pipeline"></p>
+<p>ถามว่าวางผิดแล้วเป็นอะไรมั้ย จริงๆไม่เป็นไรค่ะ 5555 แต่บางครั้งปัญหาที่แท้จริงอาจถูกปัดตกไปเพราะ middleware ชั้นที่ควรทำหลังดันทำก่อน และการทำงานผิดลำดับยังทำให้แอพต้อง process งานที่ไม่จำเป็นทั้งๆที่บาง request อาจปัดตกไปตั้งแต่ชั้นแรกๆได้ด้วยซ้ำ</p>
+<h3 id="บทเรียนที่-3-วาง-middleware-pipeline-ดี-มีชัยไปกว่าครึ่ง"><a href="#บทเรียนที่-3-วาง-middleware-pipeline-ดี-มีชัยไปกว่าครึ่ง" class="headerlink" title="บทเรียนที่ 3 วาง middleware pipeline ดี มีชัยไปกว่าครึ่ง"></a><strong>บทเรียนที่ 3 วาง middleware pipeline ดี มีชัยไปกว่าครึ่ง</strong></h3><hr>
+<h2 id="หลุมที่-4-Middleware-Pipeline-จะ-wrap-error-message-ของเราไว้จนดูเหมือนทุกอย่างเป็น-CORS-policy-บน-Staging-Production-environment"><a href="#หลุมที่-4-Middleware-Pipeline-จะ-wrap-error-message-ของเราไว้จนดูเหมือนทุกอย่างเป็น-CORS-policy-บน-Staging-Production-environment" class="headerlink" title="หลุมที่ 4 Middleware Pipeline จะ wrap error message ของเราไว้จนดูเหมือนทุกอย่างเป็น CORS policy บน Staging/Production environment"></a><a name="cors-suspect">หลุมที่ 4 Middleware Pipeline จะ wrap error message ของเราไว้จนดูเหมือนทุกอย่างเป็น CORS policy บน Staging/Production environment</a></h2><p>หลังจาก upgrade libraries ไปจนหมด ถึงเวลาเอาขึ้น staging แต่ทันทีที่เอาขึ้นไปก็พบว่า API พังยับอย่างที่คิดไว้ แต่ที่แปลกคือทั้งหมดทั้งมวลบ้วนออกมาเป็น CORs problem ถึงตอนนี้ถ้าอ่านผ่านข้อข้างบนมาแล้วคงเริ่มเข้าใจแล้วว่า Middleware ขั้น CORs อาจไม่ใช่ผู้ร้ายตัวจริง</p>
+<p>กลับมาหาเครื่องมือที่ช่วยเราสืบหาสาเหตุได้ที่ไม่ใช่ Browser inspection/Docker error message เพราะล้วนแล้วแต่เป็น tool ที่ถูก wrap มาแล้วหลายชั้น</p>
+<p>สำหรับเราชาว C# การ Debug ExceptionHandler class OnException ไว้จะพาเราไปสู่ปัญหาที่แท้จริงได้เร็วที่สุด เป็นเครื่องมือ basic ที่ทำหน้าที่แบบเดียวกับการ try catch ด้วยการใช้ attribute ครอบ controller เป้าหมายไว้ก็ประหนึ่งว่ามี try catch อันใหญ่ครอบทุก API Controller ของเรา ทั้งยังเปิดโอกาสให้แปลง response ให้อยู่ในรูปแบบที่ต้องการก่อนส่งออกไปอีกด้วย</p>
+<h3 id="บทเรียนที่-4-ยึดหลักการ-StackTrace-ไว้ให้มั่น-error-ที่ใกล้ต้นตอมากที่สุด-เป็นของที่-real-ที่สุด"><a href="#บทเรียนที่-4-ยึดหลักการ-StackTrace-ไว้ให้มั่น-error-ที่ใกล้ต้นตอมากที่สุด-เป็นของที่-real-ที่สุด" class="headerlink" title="บทเรียนที่ 4 ยึดหลักการ StackTrace ไว้ให้มั่น error ที่ใกล้ต้นตอมากที่สุด เป็นของที่ real ที่สุด"></a><strong>บทเรียนที่ 4 ยึดหลักการ StackTrace ไว้ให้มั่น error ที่ใกล้ต้นตอมากที่สุด เป็นของที่ real ที่สุด</strong></h3><hr>
+<p>ก็จบลงแล้วกับมหากาพย์การเปลี่ยน framework ที่หายตัวไม่ได้งอกบล็อคเลยก็คือมัวแต่ทำสิ่งนี้อยู่นี่แหละค่ะ 555 กะว่าพอทำเสร็จแล้วคงมีเรื่องเล่ามากมาย แต่เอาตรงๆการมานั่งแจกแจงว่าต้องทำอะไรบ้างมันหาอ่านได้ทั่วไป จริงๆถ้าอ่าน Official Migration 2.2 to 3.0 ก็จะเห็นเกือบหมดแล้วว่าต้องทำอะไรบ้าง หรือการบอกว่าต้องเปลี่ยน libraries อะไรบ้างก็เช่นกัน มันมี Official Breaking Change ที่แจกแจงรายละเอียดมาเพียบแล้วว่าต้องเปลี่ยนตัวไหน และการใช้ lib ของเราก็คงไม่เหมือนกัน</p>
+<p>แต่ความผิดพลาด เป็นสิ่งที่ถ่ายทอดออกมา แล้วช่วยลดเวลาการงมของเพื่อนมนุษย์ด้วยกันได้ดีที่สุด 5555</p>
+<blockquote>
+<p>Happy refactoring ค่ะ <span class="github-emoji" alias="wink" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png?v8">&#x1f609;</span></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://saintsitive-dev.github.io/2020/09/06/c-sharp-change-framework/" data-id="cker3c9ip0002zvni42a6246r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASP-NET-Core-2-2/" rel="tag">ASP.NET Core 2.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASP-NET-Core-3-1/" rel="tag">ASP.NET Core 3.1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/" rel="tag">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Migration/" rel="tag">Migration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lesson-learned/" rel="tag">lesson learned</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-jmeter-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/16/jmeter-2/" class="article-date">
@@ -184,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/" data-id="ckepxykye000y0xr45gvggzfl" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/16/jmeter-2/" data-id="cker3c9ja0018zvni96cw7us4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
@@ -257,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/" data-id="ckepxykxx00030xr49j3739wk" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/15/c-sharp-8/" data-id="cker3c9in0001zvni3yogcq0x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li></ul>
@@ -363,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/" data-id="ckepxykxz00050xr45iy0824t" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/12/jmeter-1/" data-id="cker3c9is0005zvnideib7qkf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/testing/" rel="tag">testing</a></li></ul>
@@ -450,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/09/jira-automation/" data-id="ckepxykxy00040xr45hmmhiz6" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/09/jira-automation/" data-id="cker3c9ir0004zvnicz145yyz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a></li></ul>
@@ -573,7 +656,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/07/living-document/" data-id="ckepxyky100080xr4cz1f7iv7" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/07/living-document/" data-id="cker3c9it0006zvni936n9ao1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/" rel="tag">XML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swagger/" rel="tag">swagger</a></li></ul>
@@ -632,7 +715,7 @@
 <li>push code ของเราขึ้นไปวางบน branch master ก่อนค่ะ มันจำเป็นต้องมี branch master เป็น branch แรก</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;initial commit&quot;</span><br><span class="line">$ git remote add origin https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;new_repo</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:username/new_repo เอาแทนนะ</p>
+<p>ถ้าใครใช้ SSH ก็เป็น <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#109;</a>:username/new_repo เอาแทนนะ</p>
 <h3 id="CI-CD-to-automatically-deploy-site-when-changes"><a href="#CI-CD-to-automatically-deploy-site-when-changes" class="headerlink" title="CI/CD to automatically deploy site when changes"></a>CI/CD to automatically deploy site when changes</h3><p>ธรรมดาโลกไม่จำ งั้นเราต้องทำ CI/CD มาทั้งทีเอาให้สุดค่ะ 5555 เรามีแผนอย่างงี้ จะเอา CI tools ที่ขึ้นได้ไวๆ ฟรีๆ (ฟรีอีกแล้ว) มารันของจาก branch hexo_source พอ build เสร็จค่อยใส่กลับลง master ประหลาดกว่าการทำ CI ทั่วๆไปแต่มันเป็นสิ่งที่ github pages ต้องการ </p>
 <p>ตอนแรกจะเลือก jenkins แต่การต้องตั้ง server + config อีกมหาศาลจะผิดหลักการฟรีและเร็วของเรา 555 กรรมเลยมาตกที่ travis CI ที่เป็นอีกเจ้าที่เปิดให้ CI open source ได้ฟรี แถมง่าย แน่นอนสำหรับ blog ของเราที่ไม่ต้องโหดร้ายแบบ api server เท่านี้ก็ถือว่าเพียงพอค่ะ</p>
 <ol>
@@ -666,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="ckepxyky200090xr45wz891xe" class="article-share-link">Share</a>
+      <a data-url="https://saintsitive-dev.github.io/2020/08/03/start-a-journey/" data-id="cker3c9iv0009zvni4zrsapxz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -689,7 +772,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/" rel="tag">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testing/" rel="tag">testing</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET-Core-2-2/" rel="tag">ASP.NET Core 2.2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET-Core-3-1/" rel="tag">ASP.NET Core 3.1</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Framework/" rel="tag">Framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JIRA/" rel="tag">JIRA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Load-test/" rel="tag">Load test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Migration/" rel="tag">Migration</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance-test/" rel="tag">Performance test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redoc/" rel="tag">Redoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stress-test/" rel="tag">Stress test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/conceptual/" rel="tag">conceptual</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lesson-learned/" rel="tag">lesson learned</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/" rel="tag">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testing/" rel="tag">testing</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -699,7 +782,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/JIRA/" style="font-size: 10px;">JIRA</a> <a href="/tags/JMeter/" style="font-size: 20px;">JMeter</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Load-test/" style="font-size: 20px;">Load test</a> <a href="/tags/Performance-test/" style="font-size: 20px;">Performance test</a> <a href="/tags/Redoc/" style="font-size: 10px;">Redoc</a> <a href="/tags/Stress-test/" style="font-size: 20px;">Stress test</a> <a href="/tags/XML/" style="font-size: 10px;">XML</a> <a href="/tags/conceptual/" style="font-size: 10px;">conceptual</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/testing/" style="font-size: 20px;">testing</a>
+      <a href="/tags/ASP-NET-Core-2-2/" style="font-size: 10px;">ASP.NET Core 2.2</a> <a href="/tags/ASP-NET-Core-3-1/" style="font-size: 10px;">ASP.NET Core 3.1</a> <a href="/tags/C/" style="font-size: 20px;">C#</a> <a href="/tags/Framework/" style="font-size: 10px;">Framework</a> <a href="/tags/JIRA/" style="font-size: 10px;">JIRA</a> <a href="/tags/JMeter/" style="font-size: 15px;">JMeter</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Load-test/" style="font-size: 15px;">Load test</a> <a href="/tags/Migration/" style="font-size: 10px;">Migration</a> <a href="/tags/Performance-test/" style="font-size: 15px;">Performance test</a> <a href="/tags/Redoc/" style="font-size: 10px;">Redoc</a> <a href="/tags/Stress-test/" style="font-size: 15px;">Stress test</a> <a href="/tags/XML/" style="font-size: 10px;">XML</a> <a href="/tags/conceptual/" style="font-size: 10px;">conceptual</a> <a href="/tags/lesson-learned/" style="font-size: 10px;">lesson learned</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/testing/" style="font-size: 15px;">testing</a>
     </div>
   </div>
 
@@ -708,7 +791,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -719,6 +802,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/09/06/c-sharp-change-framework/">เปลี่ยน netcoreapp2.2 เป็น netcoreapp3.1 บทเรียนที่ได้มาจากการฝ่าหลุมอากาศ!!</a>
+          </li>
         
           <li>
             <a href="/2020/08/16/jmeter-2/">JMeter Series - [2] Recording Template บันทึกรูปแบบการท่องเว็บไว้ยิงรัวๆ</a>
@@ -734,10 +821,6 @@
         
           <li>
             <a href="/2020/08/09/jira-automation/">สร้างระบบ Ticket Issuing ด้วย JIRA Issue Collector + Jira Automation</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/07/living-document/">คืนชีวิตให้ Technical Document บน ASP.NET Core 3.1 ด้วย XML Comments + SwashBuckle + Redoc</a>
           </li>
         
       </ul>
