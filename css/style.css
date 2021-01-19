@@ -308,7 +308,8 @@ body {
 }
 #header {
   height: 100px;
-  position: relative;
+  position: sticky;
+  top: 0;
   border-bottom: 1px solid #ddd;
   background-color: #f1f1f1;
 }
@@ -474,6 +475,9 @@ body {
 }
 .article-inner {
   overflow: hidden;
+}
+.article-meta {
+  margin-top: 20px;
 }
 .article-meta:before,
 .article-meta:after {
@@ -671,11 +675,11 @@ a.article-title:hover {
   clear: both;
 }
 .article-footer a {
-  color: #f1f1f1;
+  color: #b3a188;
   text-decoration: none;
 }
 .article-footer a:hover {
-  color: #293242;
+  color: #916848;
 }
 .article-tag-list-item {
   float: left;
